@@ -1,2284 +1,1148 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>مُوَقَّت | طريقك إلى العلم النافع</title>
-
-<style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  font-family:Tahoma,Arial,sans-serif;
-  background:#180713;
-  color:#fff;
-  line-height:1.9;
-}
-
-button,input,textarea{
-  font-family:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-.hero{
-  min-height:100vh;
-  position:relative;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-  padding:25px;
-  background:
-    radial-gradient(circle at 50% 45%,#c92a83 0,#69103f 40%,#180713 100%);
-}
-
-.curtain{
-  position:absolute;
-  top:0;
-  width:34%;
-  height:100%;
-  z-index:10;
-  background:
-    linear-gradient(
-      90deg,
-      #11020a,
-      #570b35 25%,
-      #d52d86 55%,
-      #620c3b 80%,
-      #18030d
-    );
-  box-shadow:0 0 70px rgba(255,60,175,.65);
-  transition:transform 1.8s ease;
-}
-
-.curtain.left{
-  left:0;
-  clip-path:polygon(
-    0 0,100% 0,86% 12%,96% 25%,82% 38%,
-    95% 52%,80% 66%,94% 80%,78% 91%,88% 100%,0 100%
-  );
-}
-
-.curtain.right{
-  right:0;
-  transform:scaleX(-1);
-  clip-path:polygon(
-    0 0,100% 0,86% 12%,96% 25%,82% 38%,
-    95% 52%,80% 66%,94% 80%,78% 91%,88% 100%,0 100%
-  );
-}
-
-.hero.open .curtain.left{
-  transform:translateX(-115%);
-}
-
-.hero.open .curtain.right{
-  transform:translateX(115%) scaleX(-1);
-}
-
-.hero-card{
-  position:relative;
-  z-index:5;
-  width:min(900px,100%);
-  padding:55px 30px;
-  text-align:center;
-  border-radius:38px;
-  background:rgba(25,4,19,.84);
-  border:1px solid rgba(255,190,225,.45);
-  box-shadow:0 0 90px rgba(255,50,170,.42);
-  backdrop-filter:blur(12px);
-}
-
-.candle{
-  font-size:70px;
-  filter:drop-shadow(0 0 20px #ffd1eb);
-}
-
-.brand{
-  font-size:clamp(50px,10vw,90px);
-  color:#ffd8ed;
-  text-shadow:0 0 28px #ff3c9f;
-}
-
-.subtitle{
-  font-size:clamp(21px,4vw,31px);
-  color:#fff0f8;
-}
-
-.quote{
-  margin:20px 0;
-  font-size:20px;
-  color:#ffd1e8;
-  font-style:italic;
-}
-
-.intro{
-  max-width:720px;
-  margin:auto;
-  color:#ffeaf5;
-  font-size:17px;
-}
-
-.start-btn,
-.main-btn,
-.card-btn,
-.close-btn,
-.back-btn{
-  border:0;
-  border-radius:50px;
-  padding:13px 28px;
-  background:linear-gradient(135deg,#97105f,#f0449d);
-  color:#fff;
-  font-size:17px;
-  box-shadow:0 8px 25px rgba(255,55,165,.25);
-}
-
-.start-btn{
-  margin-top:30px;
-  padding:15px 40px;
-  font-size:19px;
-}
-
-.site{
-  display:none;
-  min-height:100vh;
-  padding:55px 16px;
-  background:
-    radial-gradient(
-      circle at 10% 5%,
-      rgba(210,30,135,.42),
-      transparent 27%
-    ),
-    linear-gradient(180deg,#691344,#190713);
-}
-
-.container{
-  width:min(1120px,100%);
-  margin:auto;
-}
-
-.welcome{
-  text-align:center;
-  margin-bottom:45px;
-}
-
-.welcome h2,
-.section-title{
-  color:#ffd0e8;
-  text-shadow:0 0 15px rgba(255,50,160,.5);
-}
-
-.welcome h2{
-  font-size:clamp(29px,6vw,46px);
-}
-
-.welcome p{
-  color:#ffe7f3;
-}
-
-.notice,
-.box,
-.card,
-.journey,
-.library,
-.quran-portal,
-.arabic-page{
-  background:rgba(255,255,255,.065);
-  border:1px solid rgba(255,155,210,.22);
-  box-shadow:0 15px 45px rgba(0,0,0,.25);
-  backdrop-filter:blur(8px);
-}
-
-.notice{
-  padding:22px;
-  margin-bottom:42px;
-  border-radius:25px;
-  text-align:center;
-  color:#ffe4f1;
-}
-
-.notice strong{
-  color:#ffd0e8;
-}
-
-.box{
-  padding:30px;
-  border-radius:28px;
-  margin-bottom:48px;
-}
-
-.box h3{
-  color:#ffd0e8;
-  font-size:26px;
-  margin-bottom:20px;
-}
-
-.question{
-  margin-bottom:28px;
-}
-
-.question p{
-  font-weight:bold;
-  margin-bottom:12px;
-  color:#fff2f8;
-}
-
-.options{
-  display:grid;
-  gap:10px;
-}
-
-.option{
-  padding:13px 15px;
-  border:1px solid rgba(255,175,220,.25);
-  background:rgba(255,255,255,.06);
-  border-radius:15px;
-  cursor:pointer;
-  color:#fff;
-}
-
-.option.selected{
-  background:rgba(255,60,160,.35);
-  border-color:#ff80c4;
-}
-
-.result{
-  display:none;
-  margin-top:25px;
-  padding:22px;
-  border-radius:20px;
-  background:rgba(255,180,220,.1);
-  border:1px solid rgba(255,155,210,.35);
-}
-
-.plan{
-  display:none;
-  margin-top:18px;
-}
-
-.plan ul{
-  padding-right:22px;
-}
-
-.section-title{
-  text-align:center;
-  font-size:31px;
-  margin-bottom:25px;
-}
-
-.cards{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;
-  margin-bottom:48px;
-}
-
-.card{
-  padding:28px 20px;
-  text-align:center;
-  border-radius:25px;
-  color:#fff;
-}
-
-.card-icon{
-  font-size:46px;
-}
-
-.card h3{
-  color:#ffd0e8;
-  margin:8px 0;
-  font-size:22px;
-}
-
-.card p{
-  color:#ffe7f3;
-}
-
-.card-btn{
-  margin-top:18px;
-}
-
-.free-badge{
-  display:inline-block;
-  padding:5px 13px;
-  border-radius:20px;
-  background:rgba(80,220,150,.14);
-  color:#b9ffd7;
-  margin:5px;
-  font-size:13px;
-}
-
-.paid-badge{
-  display:inline-block;
-  padding:5px 13px;
-  border-radius:20px;
-  background:rgba(255,190,80,.15);
-  color:#ffe1a0;
-  margin:5px;
-  font-size:13px;
-}
-
-.knowledge{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:18px;
-  margin-bottom:50px;
-}
-
-.knowledge-item{
-  padding:23px;
-  border-radius:22px;
-  background:rgba(255,255,255,.055);
-  border:1px solid rgba(255,155,210,.18);
-}
-
-.knowledge-item h3{
-  color:#ffd0e8;
-  margin-bottom:8px;
-}
-
-.knowledge-item p{
-  color:#ffe7f3;
-}
-
-.journey,
-.library,
-.quran-portal,
-.arabic-page{
-  padding:30px;
-  border-radius:28px;
-  margin-bottom:48px;
-}
-
-.quran-portal{
-  display:none;
-}
-
-.quran-head{
-  text-align:center;
-  margin-bottom:25px;
-}
-
-.quran-head h2{
-  font-size:35px;
-  color:#ffd0e8;
-}
-
-.quran-grid,
-.stats,
-.language-grid,
-.level-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
-  gap:14px;
-  margin-top:22px;
-}
-
-.stat,
-.quran-card,
-.language-item,
-.level-item{
-  padding:18px;
-  border-radius:16px;
-  background:rgba(255,255,255,.06);
-  color:#ffe3f0;
-  text-align:center;
-}
-
-.quran-card h3{
-  color:#ffd0e8;
-  margin:8px 0;
-}
-
-.reading{
-  padding:24px;
-  margin-top:25px;
-  border-radius:22px;
-  background:rgba(20,3,15,.5);
-  border:1px solid rgba(255,180,220,.2);
-}
-
-.ayah{
-  font-family:Georgia,serif;
-  font-size:25px;
-  line-height:2.2;
-  color:#ffe7f3;
-  text-align:center;
-}
-
-.audio-box{
-  text-align:center;
-  margin-top:18px;
-}
-
-.audio-box button{
-  margin:6px;
-}
-
-.progress-wrap{
-  margin:18px 0;
-}
-
-.bar-bg{
-  height:16px;
-  background:rgba(255,255,255,.12);
-  border-radius:20px;
-  overflow:hidden;
-}
-
-.progress{
-  height:100%;
-  width:18%;
-  background:linear-gradient(90deg,#ff4ca8,#ffd1eb);
-  border-radius:20px;
-  transition:.4s;
-}
-
-.badge{
-  display:inline-block;
-  padding:5px 13px;
-  border-radius:20px;
-  background:rgba(255,190,220,.12);
-  color:#ffd0e8;
-  margin:4px;
-}
-
-.input{
-  width:100%;
-  padding:12px;
-  margin:7px 0;
-  border-radius:12px;
-  border:1px solid rgba(255,175,220,.25);
-  background:rgba(255,255,255,.07);
-  color:#fff;
-}
-
-textarea.input{
-  resize:vertical;
-}
-
-.notice-small{
-  font-size:14px;
-  color:#ffd8e9;
-  margin-top:10px;
-}
-
-.arabic-hero{
-  text-align:center;
-  padding:30px;
-  border-radius:25px;
-  background:
-    linear-gradient(
-      135deg,
-      rgba(49,92,70,.85),
-      rgba(75,120,92,.7)
-    );
-  margin-bottom:25px;
-}
-
-.arabic-hero h2{
-  color:#fff;
-  font-size:32px;
-}
-
-.arabic-lesson{
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.15);
-  border-radius:22px;
-  padding:25px;
-  margin-top:20px;
-}
-
-.word{
-  font-size:36px;
-  text-align:center;
-  color:#ffe7b5;
-  margin:15px 0;
-}
-
-.translation{
-  text-align:center;
-  color:#fff;
-  font-size:19px;
-}
-
-.arabic-options{
-  display:grid;
-  gap:10px;
-  margin-top:18px;
-}
-
-.arabic-option{
-  border:1px solid rgba(255,190,220,.2);
-  background:rgba(255,255,255,.06);
-  color:#fff;
-  padding:14px;
-  border-radius:15px;
-  text-align:left;
-  direction:ltr;
-}
-
-.arabic-option.correct{
-  background:rgba(50,200,120,.25);
-  border-color:#72e0a3;
-}
-
-.arabic-option.wrong{
-  background:rgba(220,60,80,.25);
-  border-color:#ff8290;
-}
-
-.payment-box{
-  border:1px solid rgba(255,210,120,.35);
-  background:rgba(255,190,70,.08);
-  border-radius:22px;
-  padding:25px;
-  margin-top:25px;
-}
-
-.payment-box h3{
-  color:#ffe1a0;
-}
-
-.language-item,
-.level-item{
-  cursor:pointer;
-}
-
-.language-item.selected,
-.level-item.selected{
-  border-color:#ff80c4;
-  background:rgba(255,60,160,.2);
-}
-
-footer{
-  text-align:center;
-  padding:35px;
-  color:#ffc9e3;
-}
-
-.modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  z-index:100;
-  background:rgba(0,0,0,.75);
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-}
-
-.modal.show{
-  display:flex;
-}
-
-.modal-box{
-  width:min(620px,100%);
-  padding:30px;
-  border-radius:28px;
-  text-align:center;
-  background:linear-gradient(145deg,#74134f,#260b1e);
-  border:1px solid #ff8bc8;
-}
-
-.close-btn{
-  margin-top:20px;
-}
-
-.back-btn{
-  margin-bottom:25px;
-}
-
-.hidden{
-  display:none;
-}
-
-@media(max-width:600px){
-  .hero-card{
-    padding:40px 18px;
-  }
-
-  .box,
-  .journey,
-  .library,
-  .quran-portal,
-  .arabic-page{
-    padding:20px;
-  }
-
-  .start-btn{
-    width:100%;
-  }
-
-  .curtain{
-    width:27%;
-  }
-
-  .cards{
-    grid-template-columns:repeat(2,1fr);
-    gap:11px;
-  }
-
-  .card{
-    padding:20px 10px;
-  }
-
-  .card h3{
-    font-size:17px;
-  }
-
-  .card p{
-    font-size:12px;
-  }
-
-  .arabic-hero h2{
-    font-size:25px;
-  }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>مواقيت | منصة القرآن</title>
+
+  <meta name="description" content="منصة القرآن والورد اليومي">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family:
+        "Noto Sans Arabic",
+        "Segoe UI",
+        Tahoma,
+        Arial,
+        sans-serif;
+      background: #f7f9fb;
+      color: #17212b;
+      line-height: 1.8;
+    }
+
+    button,
+    a {
+      font-family: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    /* ================= HEADER ================= */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #e4e9ed;
+    }
+
+    .header-inner {
+      max-width: 1180px;
+      margin: auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #17212b;
+    }
+
+    .logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 15px;
+      background: linear-gradient(135deg, #42c6d4, #238cba);
+      display: grid;
+      place-items: center;
+      color: white;
+      font-size: 25px;
+      font-weight: bold;
+      box-shadow: 0 7px 20px rgba(35,140,186,.22);
+    }
+
+    .brand-text strong {
+      display: block;
+      font-size: 20px;
+    }
+
+    .brand-text span {
+      color: #71808c;
+      font-size: 12px;
+    }
+
+    .menu-btn {
+      border: 0;
+      background: #f0f4f6;
+      width: 45px;
+      height: 45px;
+      border-radius: 13px;
+      font-size: 23px;
+    }
+
+    /* ================= NAV ================= */
+
+    nav {
+      display: none;
+      border-top: 1px solid #edf0f2;
+      background: white;
+    }
+
+    nav.open {
+      display: block;
+    }
+
+    .nav-inner {
+      max-width: 1180px;
+      margin: auto;
+      padding: 12px 20px 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .nav-inner button {
+      border: 1px solid #e0e6ea;
+      background: white;
+      padding: 9px 15px;
+      border-radius: 10px;
+      color: #33424d;
+    }
+
+    .nav-inner button:hover {
+      background: #eefafd;
+      border-color: #8dd7e2;
+    }
+
+    /* ================= MAIN ================= */
+
+    main {
+      max-width: 1180px;
+      margin: auto;
+      padding: 25px 18px 60px;
+    }
+
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+      animation: appear .25s ease;
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(7px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ================= HERO ================= */
+
+    .hero {
+      background:
+        radial-gradient(circle at 15% 20%, rgba(255,255,255,.22), transparent 25%),
+        linear-gradient(135deg, #164c5e, #208ba0 55%, #42bec3);
+      color: white;
+      border-radius: 28px;
+      padding: 42px 28px;
+      margin-bottom: 25px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 18px 45px rgba(22,76,94,.17);
+    }
+
+    .hero::after {
+      content: "﷽";
+      position: absolute;
+      left: 25px;
+      bottom: -25px;
+      font-size: 100px;
+      opacity: .08;
+    }
+
+    .hero h1 {
+      font-size: clamp(30px, 6vw, 52px);
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      max-width: 720px;
+      color: rgba(255,255,255,.88);
+      font-size: 17px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 25px;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+      border: 0;
+      border-radius: 12px;
+      padding: 12px 20px;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .primary-btn {
+      background: white;
+      color: #176478;
+    }
+
+    .secondary-btn {
+      background: rgba(255,255,255,.15);
+      color: white;
+      border: 1px solid rgba(255,255,255,.3);
+    }
+
+    /* ================= TITLE ================= */
+
+    .section-title {
+      margin: 35px 0 17px;
+    }
+
+    .section-title h2 {
+      font-size: 25px;
+    }
+
+    .section-title p {
+      color: #73818b;
+      font-size: 14px;
+    }
+
+    /* ================= CARDS ================= */
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .card {
+      border: 1px solid #e3e9ed;
+      background: white;
+      border-radius: 19px;
+      padding: 21px;
+      transition: .2s ease;
+      box-shadow: 0 5px 18px rgba(20,50,70,.04);
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: #9adce3;
+      box-shadow: 0 12px 25px rgba(20,80,100,.08);
+    }
+
+    .card-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 15px;
+      background: #eaf8fa;
+      display: grid;
+      place-items: center;
+      font-size: 25px;
+      margin-bottom: 12px;
+    }
+
+    .card h3 {
+      font-size: 17px;
+      margin-bottom: 5px;
+    }
+
+    .card p {
+      color: #71808b;
+      font-size: 13px;
+    }
+
+    .card button {
+      width: 100%;
+      margin-top: 14px;
+      padding: 9px;
+      border: 1px solid #dce6ea;
+      background: #f9fbfc;
+      border-radius: 10px;
+      color: #23677a;
+    }
+
+    /* ================= DAILY ================= */
+
+    .daily {
+      margin-top: 25px;
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 16px;
+    }
+
+    .daily-box {
+      background: white;
+      border: 1px solid #e2e8ec;
+      border-radius: 20px;
+      padding: 24px;
+    }
+
+    .progress {
+      height: 10px;
+      background: #edf1f3;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 16px 0;
+    }
+
+    .progress span {
+      display: block;
+      width: 42%;
+      height: 100%;
+      background: linear-gradient(90deg, #35afc0, #5bd0b5);
+      border-radius: inherit;
+    }
+
+    /* ================= READER ================= */
+
+    .reader {
+      background: white;
+      border: 1px solid #e1e7eb;
+      border-radius: 22px;
+      padding: 25px;
+      margin-top: 20px;
+    }
+
+    .reader-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid #edf0f2;
+      padding-bottom: 15px;
+    }
+
+    .ayah {
+      text-align: center;
+      font-family: serif;
+      font-size: 25px;
+      line-height: 2.4;
+      padding: 30px 10px;
+    }
+
+    .ayah-number {
+      display: inline-grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border: 1px solid #4eb5c2;
+      border-radius: 50%;
+      font-family: sans-serif;
+      font-size: 13px;
+      margin: 0 5px;
+      color: #238394;
+    }
+
+    /* ================= TOOLBAR ================= */
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 20px;
+    }
+
+    .tool {
+      border: 1px solid #dde5e9;
+      background: white;
+      padding: 9px 13px;
+      border-radius: 10px;
+    }
+
+    .tool:hover {
+      background: #eefafd;
+    }
+
+    /* ================= ABOUT ================= */
+
+    .info-box {
+      background: white;
+      border: 1px solid #e2e8ec;
+      border-radius: 22px;
+      padding: 27px;
+      margin-top: 20px;
+    }
+
+    .info-box h3 {
+      margin-bottom: 10px;
+      color: #195f71;
+    }
+
+    .info-box p {
+      color: #65737e;
+      margin-bottom: 12px;
+    }
+
+    /* ================= FOOTER ================= */
+
+    footer {
+      border-top: 1px solid #e2e8ec;
+      background: white;
+      padding: 30px 18px;
+      text-align: center;
+      color: #74818a;
+    }
+
+    footer strong {
+      color: #236c7d;
+    }
+
+    /* ================= RESPONSIVE ================= */
+
+    @media (max-width: 900px) {
+      .cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .daily {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .header-inner {
+        padding: 11px 13px;
+      }
+
+      main {
+        padding: 18px 12px 45px;
+      }
+
+      .hero {
+        padding: 30px 21px;
+        border-radius: 22px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .ayah {
+        font-size: 21px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- =========================
-     الواجهة الأولى
-========================= -->
+  <!-- ================= HEADER ================= -->
 
-<section class="hero" id="home">
+  <header>
+    <div class="header-inner">
 
-  <div class="curtain left"></div>
-  <div class="curtain right"></div>
+      <a href="#home" class="brand" onclick="showPage('home')">
+        <div class="logo">م</div>
 
-  <div class="hero-card">
+        <div class="brand-text">
+          <strong>مواقيت</strong>
+          <span>منصة القرآن والورد اليومي</span>
+        </div>
+      </a>
 
-    <div class="candle">🕯️</div>
+      <button class="menu-btn" onclick="toggleMenu()" aria-label="القائمة">
+        ☰
+      </button>
 
-    <div class="brand">مُوَقَّت</div>
-
-    <h2 class="subtitle">
-      طريقك إلى العلم النافع
-    </h2>
-
-    <div class="quote">
-      «مع المحبرة إلى المقبرة»
     </div>
 
-    <p class="intro">
-      منصة هادئة للتعلم المنظم؛ نأخذ منها ما نحتاج إليه من العلم النافع،
-      ثم نمضي به إلى حياتنا وعملنا.
-    </p>
+    <nav id="nav">
+      <div class="nav-inner">
 
-    <button class="start-btn" id="startBtn">
-      افتح الستارة وابدأ رحلتك
-    </button>
+        <button onclick="showPage('home')">
+          الرئيسية
+        </button>
 
-  </div>
-</section>
+        <button onclick="showPage('reading')">
+          📖 قراءة بتدبر
+        </button>
 
+        <button onclick="showPage('qiyam')">
+          🌙 ورد القيام
+        </button>
 
-<!-- =========================
-     الموقع الرئيسي
-========================= -->
+        <button onclick="showPage('near-review')">
+          🔄 مراجعة القريب
+        </button>
 
-<main class="site" id="site">
+        <button onclick="showPage('far-review')">
+          🔁 مراجعة البعيد
+        </button>
 
-<div class="container">
+        <button onclick="showPage('new-memorization')">
+          🧠 حفظ الجديد
+        </button>
 
-<section class="welcome">
+        <button onclick="showPage('teaching')">
+          👥 تحفيظ من أريد
+        </button>
 
-  <h2>
-    مرحبًا بك في مُوَقَّت 🌹
-  </h2>
+        <button onclick="showPage('ruqyah')">
+          🤲 التشافي والرقية
+        </button>
 
-  <p>
-    لنبدأ من حيث أنت، ثم نبني طريقك خطوة خطوة.
-  </p>
+        <button onclick="showPage('adhkar')">
+          🌿 الأذكار
+        </button>
 
-</section>
+        <button onclick="showPage('writing')">
+          ✍️ خطي في القرآن
+        </button>
 
+        <button onclick="showPage('about')">
+          ℹ️ عن المنصة
+        </button>
 
-<div class="notice">
+      </div>
+    </nav>
+  </header>
+
 
-  <strong>مُوَقَّت</strong>
+  <!-- ================= MAIN ================= -->
+
+  <main>
+
+    <!-- HOME -->
+
+    <section id="home" class="page active">
+
+      <div class="hero">
 
-  ليست غايةً في ذاتها؛
-  هي وسيلة للوصول إلى العلم النافع،
-  وحسن الانتفاع به.
+        <h1>بسم الله الرحمن الرحيم</h1>
 
-</div>
+        <p>
+          منصتك لتنظيم علاقتك بالقرآن الكريم:
+          قراءةً، وتدبرًا، وقيامًا، ومراجعةً، وحفظًا،
+          وتعليمًا، وذكرًا.
+        </p>
 
+        <div class="hero-actions">
 
-<!-- =========================
-     التعرف على الطالب
-========================= -->
+          <button class="primary-btn"
+                  onclick="showPage('reading')">
+            ابدأ وردك الآن
+          </button>
 
-<section class="box">
+          <button class="secondary-btn"
+                  onclick="showPage('adhkar')">
+            أذكار اليوم
+          </button>
 
-<h3>
-  🧭 بوابة التعرف عليك
-</h3>
+        </div>
 
-<div class="question">
+      </div>
 
-<p>
-1. كيف تصف مستواك في اللغة العربية؟
-</p>
 
-<div class="options">
+      <div class="section-title">
+        <h2>أورادك</h2>
+        <p>اختر الباب الذي تريد الدخول إليه.</p>
+      </div>
 
-<div class="option" data-q="1">
-مبتدئ — ما زلت أتعلم الأساسيات
-</div>
 
-<div class="option" data-q="1">
-متوسط — أفهم معظم الكلام وأحتاج إلى تطوير
-</div>
+      <div class="cards">
 
-<div class="option" data-q="1">
-متقدم — أقرأ وأفهم النصوص جيدًا
-</div>
+        <article class="card">
+          <div class="card-icon">📖</div>
+          <h3>ورد القراءة بتدبر</h3>
+          <p>قراءة القرآن مع حضور القلب والتدبر.</p>
+          <button onclick="showPage('reading')">فتح الورد</button>
+        </article>
 
-<div class="option" data-q="1">
-متمكن — أريد التعمق في علوم العربية
-</div>
+        <article class="card">
+          <div class="card-icon">🌙</div>
+          <h3>ورد القيام</h3>
+          <p>تنظيم وردك لقيام الليل.</p>
+          <button onclick="showPage('qiyam')">فتح الورد</button>
+        </article>
 
-</div>
-</div>
+        <article class="card">
+          <div class="card-icon">🔄</div>
+          <h3>مراجعة القريب</h3>
+          <p>مراجعة محفوظك القريب باستمرار.</p>
+          <button onclick="showPage('near-review')">فتح الورد</button>
+        </article>
 
+        <article class="card">
+          <div class="card-icon">🔁</div>
+          <h3>مراجعة البعيد</h3>
+          <p>إحياء المحفوظ القديم بالمراجعة.</p>
+          <button onclick="showPage('far-review')">فتح الورد</button>
+        </article>
 
-<div class="question">
+        <article class="card">
+          <div class="card-icon">🧠</div>
+          <h3>حفظ الجديد</h3>
+          <p>تنظيم مقدار الحفظ الجديد.</p>
+          <button onclick="showPage('new-memorization')">فتح الورد</button>
+        </article>
 
-<p>
-2. ما المجال الذي ترغب في البدء به؟
-</p>
+        <article class="card">
+          <div class="card-icon">👥</div>
+          <h3>تحفيظ من أريد</h3>
+          <p>متابعة من تريد مساعدته في حفظ القرآن.</p>
+          <button onclick="showPage('teaching')">فتح القسم</button>
+        </article>
 
-<div class="options">
+        <article class="card">
+          <div class="card-icon">🤲</div>
+          <h3>التشافي والرقية الشرعية</h3>
+          <p>ورد القرآن والدعاء والرقية الشرعية.</p>
+          <button onclick="showPage('ruqyah')">فتح القسم</button>
+        </article>
 
-<div class="option" data-q="2">
-📖 القرآن الكريم
-</div>
+        <article class="card">
+          <div class="card-icon">🌿</div>
+          <h3>أذكار الصباح والمساء والنوم</h3>
+          <p>تنظيم الأذكار اليومية.</p>
+          <button onclick="showPage('adhkar')">فتح الأذكار</button>
+        </article>
 
-<div class="option" data-q="2">
-🗣️ اللغة العربية
-</div>
+        <article class="card">
+          <div class="card-icon">✍️</div>
+          <h3>خطي في القرآن</h3>
+          <p>مساحة للكتابة والتدبر والتأمل.</p>
+          <button onclick="showPage('writing')">فتح القسم</button>
+        </article>
 
-<div class="option" data-q="2">
-📚 العلوم الشرعية
-</div>
+      </div>
 
-<div class="option" data-q="2">
-🌱 أريد أن أبدأ من الأساس
-</div>
 
-</div>
-</div>
+      <div class="daily">
 
+        <div class="daily-box">
 
-<div class="question">
+          <h3>ورد اليوم</h3>
 
-<p>
-3. كم تستطيع أن تخصص للتعلم يوميًا؟
-</p>
+          <p>
+            أكملت جزءًا من وردك اليومي.
+          </p>
 
-<div class="options">
+          <div class="progress">
+            <span></span>
+          </div>
 
-<div class="option" data-q="3">
-15 دقيقة
-</div>
+          <strong>42% من ورد اليوم</strong>
 
-<div class="option" data-q="3">
-نصف ساعة
-</div>
+        </div>
 
-<div class="option" data-q="3">
-ساعة
-</div>
 
-<div class="option" data-q="3">
-أكثر من ساعة
-</div>
+        <div class="daily-box">
 
-</div>
-</div>
+          <h3>رسالة اليوم</h3>
 
+          <p>
+            ﴿وَرَتِّلِ الْقُرْآنَ تَرْتِيلًا﴾
+          </p>
 
-<div class="question">
+          <button class="tool"
+                  onclick="showPage('reading')">
+            متابعة القراءة
+          </button>
 
-<p>
-4. ما هدفك من التعلم؟
-</p>
+        </div>
 
-<div class="options">
+      </div>
 
-<div class="option" data-q="4">
-بناء أساس قوي
-</div>
+    </section>
 
-<div class="option" data-q="4">
-حفظ القرآن ومراجعته
-</div>
 
-<div class="option" data-q="4">
-فهم العلوم الشرعية
-</div>
+    <!-- READING -->
 
-<div class="option" data-q="4">
-تحسين العربية وفهم التراث
-</div>
+    <section id="reading" class="page">
 
-</div>
-</div>
+      <div class="section-title">
+        <h2>📖 ورد القراءة بتدبر</h2>
+        <p>اقرأ بهدوء، وتدبر، ولا تجعل همك سرعة الإنجاز.</p>
+      </div>
 
+      <div class="reader">
 
-<button class="main-btn" id="resultBtn">
-أظهر لي طريقي
-</button>
+        <div class="reader-top">
+          <strong>سورة الفاتحة</strong>
+          <span>الآيات 1 — 7</span>
+        </div>
 
-<div class="result" id="result">
+        <div class="ayah">
 
-<h4 id="resultTitle"></h4>
+          بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
 
-<p id="resultText"></p>
+          <span class="ayah-number">١</span>
 
-<div class="plan" id="plan">
+          الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ
 
-<strong>
-اقتراح البداية:
-</strong>
+          <span class="ayah-number">٢</span>
 
-<ul id="planList"></ul>
+          الرَّحْمَٰنِ الرَّحِيمِ
 
-</div>
+          <span class="ayah-number">٣</span>
 
-</div>
+          مَالِكِ يَوْمِ الدِّينِ
 
-</section>
+          <span class="ayah-number">٤</span>
 
+        </div>
 
-<!-- =========================
-     أبواب العلم
-========================= -->
+        <div class="toolbar">
 
-<h2 class="section-title">
-أبواب العلم
-</h2>
+          <button class="tool">▶ بدء الورد</button>
+          <button class="tool">⏸ إيقاف</button>
+          <button class="tool">🔖 حفظ الموضع</button>
+          <button class="tool">➕ زيادة الخط</button>
+          <button class="tool">➖ تصغير الخط</button>
 
+        </div>
 
-<section class="cards">
+      </div>
 
+    </section>
 
-<div class="card">
 
-<div class="card-icon">
-📖
-</div>
+    <!-- QIYAM -->
 
-<h3>
-القرآن الكريم
-</h3>
+    <section id="qiyam" class="page">
 
-<p>
-تلاوة وحفظ ومراجعة وتدبر.
-</p>
+      <div class="section-title">
+        <h2>🌙 ورد القيام</h2>
+        <p>ورد مخصص لقيام الليل.</p>
+      </div>
 
-<span class="free-badge">
-مجاني بالكامل
-</span>
+      <div class="info-box">
 
-<button class="card-btn" id="quranBtn">
-افتح مسار القرآن
-</button>
+        <h3>ورد الليلة</h3>
 
-</div>
+        <p>
+          اختر مقدارًا يناسب قدرتك، والمهم الاستمرار والإخلاص.
+        </p>
 
+        <div class="toolbar">
+          <button class="tool">ركعة واحدة</button>
+          <button class="tool">ركعتان</button>
+          <button class="tool">أربع ركعات</button>
+          <button class="tool">أكثر</button>
+        </div>
 
-<div class="card">
+      </div>
 
-<div class="card-icon">
-🗣️
-</div>
+    </section>
 
-<h3>
-اللغة العربية
-</h3>
 
-<p>
-مسار خاص لغير الناطقين بالعربية.
-</p>
+    <!-- NEAR REVIEW -->
 
-<span class="paid-badge">
-مدفوع لاحقًا
-</span>
+    <section id="near-review" class="page">
 
-<button class="card-btn" id="arabicBtn">
-تعلم العربية
-</button>
+      <div class="section-title">
+        <h2>🔄 مراجعة القريب</h2>
+        <p>مراجعة المحفوظ الجديد حتى يثبت.</p>
+      </div>
 
-</div>
+      <div class="info-box">
 
+        <h3>ورد المراجعة</h3>
 
-<div class="card">
+        <p>
+          اجعل المراجعة قريبة من وقت الحفظ الجديد،
+          وكرر الآيات حتى يثبت المحفوظ.
+        </p>
 
-<div class="card-icon">
-🕌
-</div>
+        <div class="toolbar">
+          <button class="tool">▶ ابدأ المراجعة</button>
+          <button class="tool">✓ تم الإنجاز</button>
+        </div>
 
-<h3>
-العلوم الشرعية
-</h3>
+      </div>
 
-<p>
-مسارات منظمة ومتدرجة.
-</p>
+    </section>
 
-<span class="free-badge">
-المحتوى الأساسي مجاني
-</span>
 
-<button class="card-btn" data-title="العلوم الشرعية">
-ابدأ الطريق
-</button>
+    <!-- FAR REVIEW -->
 
-</div>
+    <section id="far-review" class="page">
 
+      <div class="section-title">
+        <h2>🔁 مراجعة البعيد</h2>
+        <p>مراجعة ما سبق حفظه والمحافظة عليه.</p>
+      </div>
 
-<div class="card">
+      <div class="info-box">
 
-<div class="card-icon">
-🧠
-</div>
+        <h3>المحفوظ السابق</h3>
 
-<h3>
-مهارات طلب العلم
-</h3>
+        <p>
+          هذا القسم مخصص للمحفوظ الذي ابتعدت عنه مدة،
+          حتى يعود حيًا في الذاكرة.
+        </p>
 
-<p>
-تنظيم الوقت والمراجعة والاستمرار.
-</p>
+        <div class="toolbar">
+          <button class="tool">▶ ابدأ المراجعة</button>
+          <button class="tool">📋 خطة المراجعة</button>
+        </div>
 
-<span class="free-badge">
-مجاني
-</span>
+      </div>
 
-<button class="card-btn" data-title="مهارات طلب العلم">
-ابدأ الطريق
-</button>
+    </section>
 
-</div>
 
+    <!-- NEW MEMORIZATION -->
 
-</section>
+    <section id="new-memorization" class="page">
 
+      <div class="section-title">
+        <h2>🧠 حفظ الجديد</h2>
+        <p>تنظيم الحفظ الجديد ومتابعة تقدمه.</p>
+      </div>
 
-<!-- =========================
-     القرآن
-========================= -->
+      <div class="info-box">
 
-<section class="quran-portal" id="quranPortal">
+        <h3>ورد الحفظ اليوم</h3>
 
-<div class="quran-head">
+        <p>
+          اختر مقدارًا مناسبًا لك، ثم راجعه قبل الانتقال إلى جديد آخر.
+        </p>
 
-<h2>
-📖 بوابة القرآن الكريم
-</h2>
+        <div class="toolbar">
+          <button class="tool">آية</button>
+          <button class="tool">نصف صفحة</button>
+          <button class="tool">صفحة</button>
+          <button class="tool">أكثر</button>
+        </div>
 
-<p>
-القرآن وكل ما يتعلق به مجاني بالكامل 🌿
-</p>
+      </div>
 
-<span class="badge">
-مجاني
-</span>
+    </section>
 
-<span class="badge">
-بدون دفع
-</span>
 
-</div>
+    <!-- TEACHING -->
 
+    <section id="teaching" class="page">
 
-<div class="stats">
+      <div class="section-title">
+        <h2>👥 تحفيظ من أريد</h2>
+        <p>متابعة تعليم وتحفيظ من تريد مساعدته.</p>
+      </div>
 
-<div class="stat">
+      <div class="info-box">
 
-<strong id="daysLeft">
-—
-</strong>
+        <h3>المتعلمون</h3>
 
-<br>
+        <p>
+          أضف اسم المتعلم ثم تابع محفوظاته ومراجعته وتقدمه.
+        </p>
 
-يومًا متبقيًا للختم
+        <div class="toolbar">
+          <button class="tool">＋ إضافة متعلم</button>
+          <button class="tool">📋 سجل المتابعة</button>
+        </div>
 
-</div>
+      </div>
 
+    </section>
 
-<div class="stat">
 
-<strong>
-صفحة واحدة
-</strong>
+    <!-- RUQYAH -->
 
-<br>
+    <section id="ruqyah" class="page">
 
-مقدار اليوم
+      <div class="section-title">
+        <h2>🤲 التشافي والرقية الشرعية</h2>
+        <p>قسم للقراءة والدعاء والرقية الشرعية.</p>
+      </div>
 
-</div>
+      <div class="info-box">
 
+        <h3>ورد الرقية</h3>
 
-<div class="stat">
+        <p>
+          القرآن الكريم والدعاء والأذكار الشرعية،
+          مع استحضار التوكل على الله.
+        </p>
 
-<strong id="streak">
-0
-</strong>
+        <div class="toolbar">
+          <button class="tool">▶ بدء الورد</button>
+          <button class="tool">📖 القرآن</button>
+          <button class="tool">🤲 الأدعية</button>
+        </div>
 
-<br>
+      </div>
 
-أيام الاستمرار
+    </section>
 
-</div>
 
+    <!-- ADHKAR -->
 
-<div class="stat">
+    <section id="adhkar" class="page">
 
-<strong id="stars">
-0 ⭐
-</strong>
+      <div class="section-title">
+        <h2>🌿 الأذكار</h2>
+        <p>أذكار الصباح والمساء والنوم.</p>
+      </div>
 
-<br>
+      <div class="cards">
 
-نجوم الإنجاز
+        <article class="card">
+          <div class="card-icon">🌅</div>
+          <h3>أذكار الصباح</h3>
+          <p>ورد الصباح اليومي.</p>
+          <button>فتح الأذكار</button>
+        </article>
 
-</div>
+        <article class="card">
+          <div class="card-icon">🌇</div>
+          <h3>أذكار المساء</h3>
+          <p>ورد المساء اليومي.</p>
+          <button>فتح الأذكار</button>
+        </article>
 
-</div>
+        <article class="card">
+          <div class="card-icon">🌙</div>
+          <h3>أذكار النوم</h3>
+          <p>ورد ما قبل النوم.</p>
+          <button>فتح الأذكار</button>
+        </article>
 
+      </div>
 
-<div class="quran-grid">
+    </section>
 
 
-<div class="quran-card">
+    <!-- WRITING -->
 
-<div class="card-icon">
-🌿
-</div>
+    <section id="writing" class="page">
 
-<h3>
-ورد القراءة بتدبر
-</h3>
+      <div class="section-title">
+        <h2>✍️ خطي في القرآن</h2>
+        <p>مساحة خاصة للكتابة والتدبر.</p>
+      </div>
 
-<p>
-قراءة يومية مع مساحة للفائدة.
-</p>
+      <div class="info-box">
 
-<button class="card-btn ward-btn" data-ward="القراءة بتدبر">
-ابدأ الورد
-</button>
+        <h3>اكتب تدبرك</h3>
 
-</div>
+        <textarea
+          id="notes"
+          placeholder="اكتب هنا ما فتح الله به عليك..."
+          style="
+            width:100%;
+            min-height:220px;
+            margin-top:15px;
+            padding:15px;
+            border:1px solid #dfe6ea;
+            border-radius:14px;
+            font-family:inherit;
+            font-size:16px;
+            resize:vertical;
+          "
+        ></textarea>
 
+        <div class="toolbar">
+          <button class="tool" onclick="saveNotes()">
+            💾 حفظ
+          </button>
 
-<div class="quran-card">
+          <button class="tool" onclick="clearNotes()">
+            🗑 مسح
+          </button>
+        </div>
 
-<div class="card-icon">
-🌙
-</div>
+      </div>
 
-<h3>
-ورد القيام
-</h3>
+    </section>
 
-<p>
-تنظيم ورد مناسب للقيام.
-</p>
 
-<button class="card-btn ward-btn" data-ward="القيام">
-ابدأ الورد
-</button>
+    <!-- ABOUT -->
 
-</div>
+    <section id="about" class="page">
 
+      <div class="section-title">
+        <h2>ℹ️ عن المنصة</h2>
+        <p>نسخة اختبارية من منصة مواقيت.</p>
+      </div>
 
-<div class="quran-card">
+      <div class="info-box">
 
-<div class="card-icon">
-🔄
-</div>
+        <h3>مواقيت</h3>
 
-<h3>
-مراجعة القريب
-</h3>
+        <p>
+          منصة تهدف إلى جمع أوراد القرآن والذكر والمراجعة
+          في مكان واحد بطريقة بسيطة وهادئة.
+        </p>
 
-<p>
-تثبيت آخر ما تم حفظه.
-</p>
+        <p>
+          هذه النسخة تجريبية، ويمكن تطوير كل قسم لاحقًا
+          وإضافة الصفحات والبيانات والحفظ والمزامنة.
+        </p>
 
-<button class="card-btn ward-btn" data-ward="مراجعة القريب">
-ابدأ الورد
-</button>
+      </div>
 
-</div>
+    </section>
 
+  </main>
 
-<div class="quran-card">
 
-<div class="card-icon">
-🧭
-</div>
+  <!-- ================= FOOTER ================= -->
 
-<h3>
-مراجعة البعيد
-</h3>
+  <footer>
 
-<p>
-إعادة المحفوظ القديم.
-</p>
+    <strong>مواقيت</strong>
 
-<button class="card-btn ward-btn" data-ward="مراجعة البعيد">
-ابدأ الورد
-</button>
+    <br>
 
-</div>
+    منصة القرآن والورد اليومي
 
+    <br><br>
 
-<div class="quran-card">
+    © 2026
 
-<div class="card-icon">
-✨
-</div>
+  </footer>
 
-<h3>
-حفظ الجديد
-</h3>
 
-<p>
-مقدار صغير ثابت يوميًا.
-</p>
+  <!-- ================= JAVASCRIPT ================= -->
 
-<button class="card-btn ward-btn" data-ward="حفظ الجديد">
-ابدأ الورد
-</button>
+  <script>
 
-</div>
+    function hideAllPages() {
 
+      const pages = document.querySelectorAll(".page");
 
-<div class="quran-card">
-
-<div class="card-icon">
-🤲
-</div>
-
-<h3>
-تحفيظ من أريد
-</h3>
-
-<p>
-تعليم ومتابعة من تريد.
-</p>
-
-<button class="card-btn ward-btn" data-ward="التحفيظ">
-ابدأ الورد
-</button>
-
-</div>
-
-
-<div class="quran-card">
-
-<div class="card-icon">
-🌿
-</div>
-
-<h3>
-التشافي والرقية الشرعية
-</h3>
-
-<p>
-مادة شرعية منظمة دون ادعاء علاج طبي.
-</p>
-
-<button class="card-btn ward-btn" data-ward="الرقية الشرعية">
-ابدأ الورد
-</button>
-
-</div>
-
-
-<div class="quran-card">
-
-<div class="card-icon">
-🌅
-</div>
-
-<h3>
-الأذكار
-</h3>
-
-<p>
-الصباح والمساء والنوم.
-</p>
-
-<button class="card-btn ward-btn" data-ward="الأذكار">
-ابدأ الورد
-</button>
-
-</div>
-
-
-<div class="quran-card">
-
-<div class="card-icon">
-👣
-</div>
-
-<h3>
-خطّي في القرآن
-</h3>
-
-<p>
-متابعة خطواتك مع القرآن.
-</p>
-
-<button class="card-btn ward-btn" data-ward="خطّي في القرآن">
-ابدأ الورد
-</button>
-
-</div>
-
-</div>
-
-
-<!-- القراءة -->
-
-<div class="reading">
-
-<h3 style="color:#ffd0e8;text-align:center">
-📜 شاشة القراءة
-</h3>
-
-<p class="ayah">
-﴿وَرَتِّلِ الْقُرْآنَ تَرْتِيلًا﴾
-</p>
-
-
-<div class="audio-box">
-
-<button class="card-btn" id="recordBtn">
-🎙️ بدء التسجيل
-</button>
-
-<button class="card-btn" id="stopBtn">
-⏹️ إيقاف التسجيل
-</button>
-
-<p id="recordStatus" class="notice-small">
-التسجيل تجريبي داخل المتصفح فقط.
-</p>
-
-</div>
-
-</div>
-
-
-<!-- الخطة -->
-
-<div class="box" style="margin-top:25px">
-
-<h3>
-🗓️ خطة اليوم
-</h3>
-
-<label>
-موعد الحلقة:
-</label>
-
-<input
-class="input"
-id="lessonDate"
-type="datetime-local"
->
-
-<label>
-المقدار المطلوب:
-</label>
-
-<input
-class="input"
-id="amount"
-placeholder="مثال: 5 آيات"
->
-
-<label>
-معنى أو تدبر اليوم:
-</label>
-
-<textarea
-class="input"
-id="reflection"
-rows="3"
-placeholder="اكتب فائدة قصيرة..."
-></textarea>
-
-<button class="main-btn" id="savePlan">
-حفظ خطة اليوم
-</button>
-
-<p id="planSaved" class="notice-small"></p>
-
-</div>
-
-
-<!-- الاستمرار -->
-
-<div class="box">
-
-<h3>
-⭐ الاستمرار
-</h3>
-
-<p>
-الهدف هو بناء عادة يومية؛
-القليل الدائم خير من الكثير المنقطع.
-</p>
-
-<button class="main-btn" id="dailyDone">
-أنجزت ورد اليوم ✓
-</button>
-
-<p id="dailyMessage" class="notice-small"></p>
-
-</div>
-
-</section>
-
-
-<!-- =========================
-     تعلم العربية
-========================= -->
-
-<section class="arabic-page" id="arabicPage" style="display:none">
-
-<button class="back-btn" id="backFromArabic">
-↩ العودة إلى الموقع
-</button>
-
-
-<div class="arabic-hero">
-
-<h2>
-🗣️ تعلّم اللغة العربية
-</h2>
-
-<p>
-مسار مخصص لغير الناطقين بالعربية 🌍
-</p>
-
-<span class="badge">
-درس تجريبي مجاني
-</span>
-
-<span class="paid-badge">
-المسار المدفوع
-</span>
-
-</div>
-
-
-<div class="box">
-
-<h3>
-🌍 اختر لغتك المساعدة
-</h3>
-
-<div class="language-grid">
-
-<div class="language-item" data-lang="English">
-🇬🇧 English
-</div>
-
-<div class="language-item" data-lang="Français">
-🇫🇷 Français
-</div>
-
-<div class="language-item" data-lang="Türkçe">
-🇹🇷 Türkçe
-</div>
-
-<div class="language-item" data-lang="Español">
-🇪🇸 Español
-</div>
-
-<div class="language-item" data-lang="Other">
-🌍 لغة أخرى
-</div>
-
-</div>
-
-<p id="languageMessage" class="notice-small"></p>
-
-</div>
-
-
-<div class="box">
-
-<h3>
-🎯 اختر مستواك
-</h3>
-
-<div class="level-grid">
-
-<div class="level-item" data-level="beginner">
-🌱 مبتدئ تمامًا
-</div>
-
-<div class="level-item" data-level="basic">
-📖 أعرف بعض الكلمات
-</div>
-
-<div class="level-item" data-level="intermediate">
-🗣️ أفهم العربية وأريد تحسينها
-</div>
-
-<div class="level-item" data-level="advanced">
-🏛️ أريد التعمق في الفصحى
-</div>
-
-</div>
-
-<p id="levelMessage" class="notice-small"></p>
-
-</div>
-
-
-<!-- درس مجاني -->
-
-<div class="box">
-
-<span class="badge">
-🆓 مجاني
-</span>
-
-<h3>
-الدرس التجريبي الأول: التحية
-</h3>
-
-<div class="arabic-lesson">
-
-<div class="word">
-مَرْحَبًا
-</div>
-
-<div class="translation">
-Hello / مرحبًا
-</div>
-
-</div>
-
-
-<div class="arabic-lesson">
-
-<div class="word">
-السَّلَامُ عَلَيْكُمْ
-</div>
-
-<div class="translation">
-Peace be upon you
-</div>
-
-</div>
-
-
-<div class="arabic-lesson">
-
-<div class="word">
-شُكْرًا
-</div>
-
-<div class="translation">
-Thank you
-</div>
-
-</div>
-
-
-<h3 style="margin-top:25px">
-📝 اختبر نفسك
-</h3>
-
-<p>
-ما معنى كلمة:
-<strong>شُكْرًا</strong>؟
-</p>
-
-
-<div class="arabic-options">
-
-<button class="arabic-option" data-answer="wrong">
-Hello
-</button>
-
-<button class="arabic-option" data-answer="correct">
-Thank you
-</button>
-
-<button class="arabic-option" data-answer="wrong">
-Good night
-</button>
-
-</div>
-
-<p id="arabicQuizResult" class="notice-small"></p>
-
-</div>
-
-
-<!-- الاشتراك والدفع -->
-
-<div class="payment-box">
-
-<h3>
-💳 مسار العربية المدفوع
-</h3>
-
-<p>
-القرآن الكريم وجميع الأوراد والأقسام المتعلقة به
-<strong>
-مجانية بالكامل.
-</strong>
-</p>
-
-<p style="margin-top:10px">
-الدفع سيكون فقط مقابل خدمات تعليم اللغة العربية،
-بعد انتهاء التجربة المجانية وإضافة نظام الاشتراك الحقيقي.
-</p>
-
-<button class="main-btn" id="subscribeBtn">
-عرض الاشتراك
-</button>
-
-<p id="paymentMessage" class="notice-small"></p>
-
-</div>
-
-</section>
-
-
-<!-- =========================
-     طريق العلم
-========================= -->
-
-<h2 class="section-title">
-🌱 في طريق العلم
-</h2>
-
-<section class="knowledge">
-
-<div class="knowledge-item">
-<h3>
-ابدأ من الأساس
-</h3>
-<p>
-لا تجعل كثرة الأبواب تمنعك من فتح أول باب.
-</p>
-</div>
-
-<div class="knowledge-item">
-<h3>
-تعلّم بتدرج
-</h3>
-<p>
-القليل الثابت خير من الكثير المنقطع.
-</p>
-</div>
-
-<div class="knowledge-item">
-<h3>
-راجع ما تعلمت
-</h3>
-<p>
-المراجعة تثبيت للعلم.
-</p>
-</div>
-
-<div class="knowledge-item">
-<h3>
-اعمل بما تعلمت
-</h3>
-<p>
-المقصود من العلم الخير والعمل الصالح.
-</p>
-</div>
-
-<div class="knowledge-item">
-<h3>
-اسأل أهل العلم
-</h3>
-<p>
-في المسائل الشرعية نرجع إلى أهل العلم الموثوقين.
-</p>
-</div>
-
-<div class="knowledge-item">
-<h3>
-احفظ وقتك
-</h3>
-<p>
-خذ النافع ثم امضِ في حياتك.
-</p>
-</div>
-
-</section>
-
-
-<!-- =========================
-     الرحلة
-========================= -->
-
-<section class="journey">
-
-<h2 class="section-title">
-رحلتك في مُوَقَّت
-</h2>
-
-<p>
-خطوة صغيرة كل يوم، خير من طريق طويل بلا بداية.
-</p>
-
-<div class="progress-wrap">
-
-<div class="bar-bg">
-
-<div class="progress" id="mainProgress"></div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<footer>
-مُوَقَّت — طريق هادئ إلى العلم النافع 🌹
-<br>
-القرآن وكل ما يتعلق به مجاني بالكامل.
-</footer>
-
-</div>
-</main>
-
-
-<!-- =========================
-     نافذة الرسائل
-========================= -->
-
-<div class="modal" id="modal">
-
-<div class="modal-box">
-
-<h2 id="modalTitle"></h2>
-
-<p id="modalText"></p>
-
-<button class="close-btn" id="closeModal">
-إغلاق
-</button>
-
-</div>
-
-</div>
-
-
-<script>
-
-"use strict";
-
-/* =========================
-   المتغيرات
-========================= */
-
-var answers = {};
-var stars = 0;
-var streak = 0;
-var recorder = null;
-
-
-/* =========================
-   فتح الستارة
-========================= */
-
-document.getElementById("startBtn").onclick = function(){
-
-  var home = document.getElementById("home");
-
-  home.classList.add("open");
-
-  setTimeout(function(){
-
-    home.style.display = "none";
-
-    document.getElementById("site").style.display = "block";
-
-    window.scrollTo(0,0);
-
-  },1800);
-
-};
-
-
-/* =========================
-   أسئلة التعرف
-========================= */
-
-document.querySelectorAll(".option").forEach(function(option){
-
-  option.onclick = function(){
-
-    var q = this.getAttribute("data-q");
-
-    document
-      .querySelectorAll('.option[data-q="'+q+'"]')
-      .forEach(function(x){
-        x.classList.remove("selected");
+      pages.forEach(function(page) {
+        page.classList.remove("active");
       });
-
-    this.classList.add("selected");
-
-    answers[q] = this.textContent.trim();
-
-  };
-
-});
-
-
-document.getElementById("resultBtn").onclick = function(){
-
-  var result = document.getElementById("result");
-
-  var title = document.getElementById("resultTitle");
-
-  var text = document.getElementById("resultText");
-
-  var plan = document.getElementById("plan");
-
-
-  if(
-    !answers["1"] ||
-    !answers["2"] ||
-    !answers["3"] ||
-    !answers["4"]
-  ){
-
-    result.style.display = "block";
-
-    title.textContent =
-      "أكمل البوابة أولًا 🌿";
-
-    text.textContent =
-      "اختر إجابة واحدة في كل سؤال.";
-
-    plan.style.display = "none";
-
-    return;
-  }
-
-
-  var level = "مبتدئ";
-
-  if(answers["1"].indexOf("متوسط") !== -1){
-    level = "متوسط";
-  }
-
-  if(answers["1"].indexOf("متقدم") !== -1){
-    level = "متقدم";
-  }
-
-  if(answers["1"].indexOf("متمكن") !== -1){
-    level = "متمكن";
-  }
-
-
-  title.textContent =
-    "أحسنت! بدأت ترسم طريقك 🌿";
-
-
-  text.textContent =
-    "مستواك: " + level +
-    " — المجال: " + answers["2"] +
-    " — الوقت: " + answers["3"] +
-    " — الهدف: " + answers["4"];
-
-
-  var list = document.getElementById("planList");
-
-  list.innerHTML = "";
-
-
-  [
-    "ابدأ بدرس يناسب مستواك.",
-    "خصص وقتًا ثابتًا كل يوم.",
-    "راجع قبل الانتقال إلى الجديد.",
-    "اجعل القرآن حاضرًا في برنامجك بحسب قدرتك.",
-    "زد المقدار تدريجيًا."
-  ].forEach(function(item){
-
-    var li = document.createElement("li");
-
-    li.textContent = item;
-
-    list.appendChild(li);
-
-  });
-
-
-  plan.style.display = "block";
-
-  result.style.display = "block";
-
-  document.getElementById("mainProgress").style.width = "35%";
-
-  result.scrollIntoView({
-    behavior:"smooth",
-    block:"center"
-  });
-
-};
-
-
-/* =========================
-   فتح القرآن
-========================= */
-
-document.getElementById("quranBtn").onclick = function(){
-
-  var portal = document.getElementById("quranPortal");
-
-  portal.style.display = "block";
-
-  portal.scrollIntoView({
-    behavior:"smooth"
-  });
-
-};
-
-
-/* =========================
-   فتح العربية
-========================= */
-
-document.getElementById("arabicBtn").onclick = function(){
-
-  document.getElementById("site").style.display = "none";
-
-  document.getElementById("arabicPage").style.display = "block";
-
-  window.scrollTo(0,0);
-
-};
-
-
-/* =========================
-   العودة من العربية
-========================= */
-
-document.getElementById("backFromArabic").onclick = function(){
-
-  document.getElementById("arabicPage").style.display = "none";
-
-  document.getElementById("site").style.display = "block";
-
-  window.scrollTo(0,0);
-
-};
-
-
-/* =========================
-   الأقسام الأخرى
-========================= */
-
-var modal = document.getElementById("modal");
-
-
-document
-.querySelectorAll(".card-btn[data-title]")
-.forEach(function(button){
-
-  button.onclick = function(){
-
-    var title =
-      this.getAttribute("data-title");
-
-    document.getElementById("modalTitle")
-      .textContent = title;
-
-    document.getElementById("modalText")
-      .textContent =
-      "هذا القسم سيُبنى تدريجيًا داخل المنصة.";
-
-    modal.classList.add("show");
-
-  };
-
-});
-
-
-document.getElementById("closeModal").onclick =
-function(){
-
-  modal.classList.remove("show");
-
-};
-
-
-modal.onclick = function(e){
-
-  if(e.target === modal){
-
-    modal.classList.remove("show");
-
-  }
-
-};
-
-
-/* =========================
-   الأوراد
-========================= */
-
-document
-.querySelectorAll(".ward-btn")
-.forEach(function(button){
-
-  button.onclick = function(){
-
-    var ward =
-      this.getAttribute("data-ward");
-
-    var message =
-      "تم فتح ورد: " + ward +
-      " 🌿 — هذا القسم مجاني بالكامل.";
-
-    alert(message);
-
-  };
-
-});
-
-
-/* =========================
-   حفظ الخطة
-========================= */
-
-document.getElementById("savePlan").onclick =
-function(){
-
-  var date =
-    document.getElementById("lessonDate").value;
-
-  var amount =
-    document.getElementById("amount").value.trim();
-
-  var reflection =
-    document.getElementById("reflection").value.trim();
-
-
-  if(!date && !amount && !reflection){
-
-    document.getElementById("planSaved").textContent =
-      "اكتب شيئًا واحدًا على الأقل أولًا.";
-
-    return;
-
-  }
-
-
-  localStorage.setItem(
-    "muwaqqat_plan",
-    JSON.stringify({
-      date:date,
-      amount:amount,
-      reflection:reflection
-    })
-  );
-
-
-  document.getElementById("planSaved").textContent =
-    "تم حفظ خطة اليوم على هذا الجهاز ✓";
-
-};
-
-
-/* =========================
-   الإنجاز اليومي
-========================= */
-
-document.getElementById("dailyDone").onclick =
-function(){
-
-  streak++;
-
-  stars++;
-
-  document.getElementById("streak")
-    .textContent = streak;
-
-  document.getElementById("stars")
-    .textContent = stars + " ⭐";
-
-  document.getElementById("dailyMessage")
-    .textContent =
-    "بارك الله فيكِ! نجمة جديدة ⭐ واستمرار جديد.";
-
-};
-
-
-/* =========================
-   التسجيل الصوتي
-========================= */
-
-document.getElementById("recordBtn").onclick =
-function(){
-
-  if(
-    !navigator.mediaDevices ||
-    !navigator.mediaDevices.getUserMedia
-  ){
-
-    document.getElementById("recordStatus")
-      .textContent =
-      "المتصفح لا يدعم التسجيل الصوتي هنا.";
-
-    return;
-
-  }
-
-
-  navigator.mediaDevices
-  .getUserMedia({audio:true})
-  .then(function(stream){
-
-    recorder =
-      new MediaRecorder(stream);
-
-    recorder.start();
-
-    document.getElementById("recordStatus")
-      .textContent =
-      "التسجيل جارٍ... اضغط إيقاف عند الانتهاء.";
-
-    recorder.onstop = function(){
-
-      stream.getTracks()
-        .forEach(function(track){
-          track.stop();
-        });
-
-      document.getElementById("recordStatus")
-        .textContent =
-        "تم إيقاف التسجيل التجريبي. لم يُرسل إلى أي شخص.";
-
-    };
-
-  })
-  .catch(function(){
-
-    document.getElementById("recordStatus")
-      .textContent =
-      "لم يتم السماح بالوصول إلى الميكروفون.";
-
-  });
-
-};
-
-
-document.getElementById("stopBtn").onclick =
-function(){
-
-  if(
-    recorder &&
-    recorder.state !== "inactive"
-  ){
-
-    recorder.stop();
-
-  }
-
-};
-
-
-/* =========================
-   اللغة المساعدة
-========================= */
-
-document
-.querySelectorAll(".language-item")
-.forEach(function(item){
-
-  item.onclick = function(){
-
-    document
-    .querySelectorAll(".language-item")
-    .forEach(function(x){
-      x.classList.remove("selected");
-    });
-
-    this.classList.add("selected");
-
-    document.getElementById("languageMessage")
-      .textContent =
-      "اخترت اللغة المساعدة: " +
-      this.getAttribute("data-lang");
-
-  };
-
-});
-
-
-/* =========================
-   المستوى
-========================= */
-
-document
-.querySelectorAll(".level-item")
-.forEach(function(item){
-
-  item.onclick = function(){
-
-    document
-    .querySelectorAll(".level-item")
-    .forEach(function(x){
-      x.classList.remove("selected");
-    });
-
-    this.classList.add("selected");
-
-    document.getElementById("levelMessage")
-      .textContent =
-      "تم اختيار مستواك. سنبني الدروس وفقًا له 🌱";
-
-  };
-
-});
-
-
-/* =========================
-   اختبار العربية
-========================= */
-
-document
-.querySelectorAll(".arabic-option")
-.forEach(function(button){
-
-  button.onclick = function(){
-
-    var correct =
-      this.getAttribute("data-answer") === "correct";
-
-
-    document
-    .querySelectorAll(".arabic-option")
-    .forEach(function(x){
-      x.classList.remove("correct","wrong");
-    });
-
-
-    if(correct){
-
-      this.classList.add("correct");
-
-      document.getElementById("arabicQuizResult")
-        .textContent =
-        "أحسنت! ✅ شُكرًا = Thank you";
-
-    }else{
-
-      this.classList.add("wrong");
-
-      document.getElementById("arabicQuizResult")
-        .textContent =
-        "ليست هذه الإجابة. حاول مرة أخرى 🌱";
 
     }
 
-  };
 
-});
+    function showPage(pageId) {
 
+      hideAllPages();
 
-/* =========================
-   الاشتراك
-========================= */
+      const page = document.getElementById(pageId);
 
-document.getElementById("subscribeBtn").onclick =
-function(){
+      if (page) {
+        page.classList.add("active");
+      } else {
+        document.getElementById("home").classList.add("active");
+      }
 
-  document.getElementById("paymentMessage")
-    .textContent =
-    "الاشتراك الحقيقي والدفع الإلكتروني غير مفعّلين بعد. هذه نسخة اختبارية، وسنربط بوابة الدفع لاحقًا داخل مسار العربية فقط.";
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
 
-};
+      document.getElementById("nav").classList.remove("open");
 
-
-/* =========================
-   الأيام
-========================= */
-
-var now = new Date();
-
-var end =
-  new Date(
-    now.getFullYear(),
-    11,
-    31
-  );
-
-var days =
-  Math.ceil(
-    (end-now)/86400000
-  );
-
-document.getElementById("daysLeft")
-  .textContent = days;
+      history.replaceState(null, "", "#" + pageId);
+    }
 
 
-/* =========================
-   استعادة الخطة
-========================= */
+    function toggleMenu() {
 
-var savedPlan =
-  localStorage.getItem("muwaqqat_plan");
+      const nav = document.getElementById("nav");
+
+      nav.classList.toggle("open");
+
+    }
 
 
-if(savedPlan){
+    function loadPageFromHash() {
 
-  try{
+      let hash = window.location.hash.replace("#", "");
 
-    var data =
-      JSON.parse(savedPlan);
+      if (!hash) {
+        hash = "home";
+      }
 
-    document.getElementById("lessonDate")
-      .value = data.date || "";
+      const page = document.getElementById(hash);
 
-    document.getElementById("amount")
-      .value = data.amount || "";
+      if (page) {
+        hideAllPages();
+        page.classList.add("active");
+      } else {
+        hideAllPages();
+        document.getElementById("home").classList.add("active");
+      }
 
-    document.getElementById("reflection")
-      .value = data.reflection || "";
+    }
 
-  }catch(e){}
 
-}
+    function saveNotes() {
 
-</script>
+      const notes = document.getElementById("notes").value;
+
+      localStorage.setItem("muwagqat_notes", notes);
+
+      alert("تم حفظ ما كتبت في هذا الجهاز.");
+
+    }
+
+
+    function clearNotes() {
+
+      document.getElementById("notes").value = "";
+
+      localStorage.removeItem("muwagqat_notes");
+
+    }
+
+
+    function loadNotes() {
+
+      const saved =
+        localStorage.getItem("muwagqat_notes");
+
+      if (saved) {
+        document.getElementById("notes").value = saved;
+      }
+
+    }
+
+
+    window.addEventListener("hashchange", function() {
+      loadPageFromHash();
+    });
+
+
+    document.addEventListener("DOMContentLoaded", function() {
+
+      loadPageFromHash();
+
+      loadNotes();
+
+    });
+
+  </script>
 
 </body>
 </html>
