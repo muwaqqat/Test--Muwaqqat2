@@ -3,288 +3,701 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>خطى في القرآن — تجربة تعلم العربية</title>
+<title>مُوَقَّت | طريقك</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
 
 body{
-font-family:Tahoma,Arial,sans-serif;
-background:#f6f3ea;
-color:#24352b;
-min-height:100vh
+  margin:0;
+  font-family:
+    "Noto Sans Arabic",
+    "Tahoma",
+    Arial,
+    sans-serif;
+  background:#f6f3ea;
+  color:#20352b;
+  line-height:1.8;
 }
 
-.app{
-max-width:900px;
-margin:auto;
-padding:18px
+button{
+  font-family:inherit;
 }
 
+:root{
+  --green:#315c46;
+  --green2:#42765a;
+  --light:#f6f3ea;
+  --cream:#fffdf7;
+  --gold:#b79555;
+  --text:#20352b;
+}
+
+/* الستارة */
+#curtain{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  background:var(--green);
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  transition:opacity 1s ease, visibility 1s ease;
+}
+
+#curtain.hide{
+  opacity:0;
+  visibility:hidden;
+}
+
+.curtain-inner{
+  padding:30px;
+}
+
+.curtain-logo{
+  font-size:70px;
+  margin-bottom:10px;
+}
+
+.curtain-title{
+  font-size:42px;
+  font-weight:800;
+  margin:0;
+}
+
+.curtain-sub{
+  font-size:18px;
+  opacity:.9;
+  margin:10px 0 28px;
+}
+
+.start-btn{
+  border:1px solid rgba(255,255,255,.5);
+  background:#fff;
+  color:var(--green);
+  padding:13px 32px;
+  border-radius:30px;
+  font-size:18px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+/* الرأس */
 header{
-text-align:center;
-padding:24px 10px
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(246,243,234,.95);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid #ddd7c8;
 }
 
-.logo{
-width:76px;
-height:76px;
-margin:auto;
-border-radius:50%;
-background:#315c46;
-color:#f4df9b;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:34px
+.nav{
+  max-width:1150px;
+  margin:auto;
+  padding:12px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
 }
 
-h1{
-color:#244936;
-margin:10px 0 5px
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:var(--green);
+  text-decoration:none;
+  font-weight:900;
+  font-size:22px;
 }
 
-.subtitle{
-color:#68756d
+.brand-icon{
+  font-size:30px;
 }
 
-.box{
-background:white;
-border-radius:24px;
-padding:24px;
-margin:18px 0;
-box-shadow:0 7px 22px rgba(0,0,0,.07)
+nav a{
+  color:var(--text);
+  text-decoration:none;
+  margin:0 7px;
+  font-size:14px;
 }
 
-h2{
-color:#315c46;
-margin-bottom:12px
+nav a:hover{
+  color:var(--green2);
 }
 
-.lesson{
-background:#f3f7f2;
-border-radius:18px;
-padding:20px;
-margin:15px 0
+/* البطل */
+.hero{
+  max-width:1150px;
+  margin:auto;
+  padding:65px 20px 40px;
+  text-align:center;
 }
 
-.word{
-font-size:34px;
-text-align:center;
-color:#315c46;
-margin:12px 0
+.hero-logo{
+  font-size:52px;
 }
 
-.example{
-text-align:center;
-font-size:22px;
-line-height:2
+.hero h1{
+  color:var(--green);
+  font-size:clamp(38px,7vw,68px);
+  margin:0;
+  font-weight:900;
 }
 
-.options{
-display:grid;
-gap:10px;
-margin-top:15px
+.hero h2{
+  font-size:clamp(20px,4vw,30px);
+  font-weight:500;
+  margin:5px 0 18px;
 }
 
-.option,.btn{
-border:none;
-border-radius:14px;
-padding:13px 16px;
-font-family:inherit;
-cursor:pointer
+.hero p{
+  max-width:700px;
+  margin:0 auto 25px;
+  color:#5e665f;
+  font-size:17px;
 }
 
-.option{
-background:#f7f5ef;
-border:1px solid #e2ded1;
-text-align:right
-}
-
-.option:hover{
-background:#e9f1ea
+.hero-buttons{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:12px;
 }
 
 .btn{
-background:#315c46;
-color:white;
-margin-top:15px
+  border:none;
+  padding:13px 24px;
+  border-radius:28px;
+  cursor:pointer;
+  font-size:16px;
+  font-weight:bold;
 }
 
-.back{
-background:#315c46;
-color:white;
-border:none;
-border-radius:14px;
-padding:11px 18px;
-font-family:inherit;
-cursor:pointer
+.btn-primary{
+  background:var(--green);
+  color:white;
 }
 
-.result{
-margin-top:14px;
-font-weight:bold
+.btn-secondary{
+  background:white;
+  color:var(--green);
+  border:1px solid #c9c4b5;
 }
 
-.badge{
-display:inline-block;
-background:#e5f3e9;
-color:#315c46;
-border-radius:20px;
-padding:5px 12px;
-font-size:12px
+/* البوابات */
+.section{
+  max-width:1150px;
+  margin:auto;
+  padding:35px 20px;
 }
 
-.free{
-background:#fff1d8;
-color:#7a5600
+.section-title{
+  text-align:center;
+  color:var(--green);
+  font-size:30px;
+  margin-bottom:8px;
 }
 
-.progress{
-height:12px;
-background:#e7e4da;
-border-radius:20px;
-overflow:hidden;
-margin-top:12px
+.section-intro{
+  text-align:center;
+  color:#6c716d;
+  margin-top:0;
+  margin-bottom:25px;
 }
 
-.bar{
-height:100%;
-width:33%;
-background:#47775c
+.gates{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:16px;
 }
 
+.gate{
+  background:var(--cream);
+  border:1px solid #ddd7c8;
+  border-radius:20px;
+  padding:25px 18px;
+  text-align:center;
+  cursor:pointer;
+  transition:.25s;
+  box-shadow:0 5px 18px rgba(49,92,70,.06);
+}
+
+.gate:hover{
+  transform:translateY(-4px);
+  border-color:#b9c8bd;
+}
+
+.gate-icon{
+  font-size:38px;
+}
+
+.gate h3{
+  color:var(--green);
+  margin:8px 0;
+}
+
+/* القرآن */
+.quran-section{
+  background:var(--green);
+  color:white;
+  margin-top:25px;
+}
+
+.quran-section .section-title{
+  color:white;
+}
+
+.quran-section .section-intro{
+  color:#e5eee8;
+}
+
+.wards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:14px;
+}
+
+.ward{
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.22);
+  border-radius:18px;
+  padding:20px 14px;
+  text-align:center;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.ward:hover{
+  background:rgba(255,255,255,.17);
+  transform:translateY(-3px);
+}
+
+.ward-icon{
+  font-size:34px;
+}
+
+.ward h3{
+  margin:8px 0 3px;
+  font-size:18px;
+}
+
+.ward p{
+  margin:0;
+  font-size:13px;
+  opacity:.82;
+}
+
+/* العربية */
+.arabic{
+  background:#fffdf7;
+  border-top:1px solid #ddd7c8;
+  border-bottom:1px solid #ddd7c8;
+}
+
+.arabic-card{
+  max-width:800px;
+  margin:auto;
+  background:#f6f3ea;
+  border-radius:24px;
+  padding:30px;
+  text-align:center;
+}
+
+.arabic-card .big{
+  font-size:44px;
+  color:var(--gold);
+}
+
+.arabic-card h3{
+  color:var(--green);
+}
+
+/* نافذة */
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:5000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(0,0,0,.5);
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  width:min(650px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:#fffdf7;
+  border-radius:25px;
+  padding:28px;
+  position:relative;
+}
+
+.close{
+  position:absolute;
+  left:18px;
+  top:12px;
+  border:none;
+  background:none;
+  font-size:30px;
+  cursor:pointer;
+  color:#666;
+}
+
+.modal-box h2{
+  color:var(--green);
+}
+
+.check{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  margin:12px 0;
+}
+
+.check input{
+  width:20px;
+  height:20px;
+}
+
+/* تذييل */
 footer{
-text-align:center;
-color:#89928c;
-font-size:12px;
-padding:25px
+  text-align:center;
+  padding:40px 20px;
+  color:#69716b;
+}
+
+footer strong{
+  color:var(--green);
+}
+
+@media(max-width:700px){
+  nav{
+    display:none;
+  }
+
+  .hero{
+    padding-top:45px;
+  }
+
+  .section{
+    padding-left:14px;
+    padding-right:14px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="app">
+<!-- الستارة -->
+<div id="curtain">
+  <div class="curtain-inner">
+    <div class="curtain-logo">☘</div>
+    <h1 class="curtain-title">مُوَقَّت</h1>
+    <div class="curtain-sub">طريقك إلى العلم والعمل</div>
+    <button class="start-btn" onclick="enterSite()">
+      بسم الله نبدأ 🌿
+    </button>
+  </div>
+</div>
 
 <header>
-<div class="logo">🗣️</div>
-<h1>تعلّم اللغة العربية</h1>
-<p class="subtitle">تجربة أولى لغير الناطقين بالعربية</p>
+  <div class="nav">
+    <a href="#top" class="brand">
+      <span class="brand-icon">☘</span>
+      <span>مُوَقَّت</span>
+    </a>
+
+    <nav>
+      <a href="#top">الرئيسية</a>
+      <a href="#quran">القرآن</a>
+      <a href="#arabic">العربية</a>
+      <a href="#journey">رحلتي</a>
+    </nav>
+  </div>
 </header>
 
-<button class="back" onclick="history.back()">↩ العودة</button>
+<main id="top">
 
-<div class="box">
+<section class="hero">
+  <div class="hero-logo">☘</div>
 
-<span class="badge">🆓 درس تجريبي مجاني</span>
-<span class="badge free">العربية هي المسار المدفوع لاحقًا</span>
+  <h1>مُوَقَّت</h1>
 
-<h2 style="margin-top:14px">
-الدرس الأول: التحية
-</h2>
+  <h2>طريقك إلى العلم والعمل</h2>
 
-<p>
-نتعلم اليوم ثلاث عبارات عربية أساسية.
-</p>
+  <p>
+    مساحة تجمع بين القرآن، والتعلّم، والمراجعة،
+    وتساعدك أن تجعل العلم جزءًا حيًّا من يومك.
+  </p>
 
-<div class="lesson">
-<div class="word">مَرْحَبًا</div>
-<p class="example">مرحبًا بك!</p>
-</div>
+  <div class="hero-buttons">
+    <button class="btn btn-primary"
+            onclick="document.getElementById('quran').scrollIntoView()">
+      ابدأ مع القرآن
+    </button>
 
-<div class="lesson">
-<div class="word">السَّلَامُ عَلَيْكُمْ</div>
-<p class="example">السلام عليكم يا صديقي.</p>
-</div>
+    <button class="btn btn-secondary"
+            onclick="document.getElementById('journey').scrollIntoView()">
+      رحلتي في مُوَقَّت
+    </button>
+  </div>
+</section>
 
-<div class="lesson">
-<div class="word">شُكْرًا</div>
-<p class="example">شكرًا لك.</p>
-</div>
+<section class="section">
+  <h2 class="section-title">طريقك</h2>
 
-</div>
+  <p class="section-intro">
+    اختر الباب الذي تريد أن تدخل منه الآن.
+  </p>
 
-<div class="box">
+  <div class="gates">
 
-<h2>📝 اختبر نفسك</h2>
+    <div class="gate" onclick="openModal('القرآن الكريم')">
+      <div class="gate-icon">📖</div>
+      <h3>القرآن الكريم</h3>
+      <p>قراءة، تدبر، حفظ، مراجعة وقيام.</p>
+    </div>
 
-<p>
-ما معنى كلمة <strong>«شُكْرًا»</strong>؟
-</p>
+    <div class="gate" onclick="openModal('تعلّم اللغة العربية')">
+      <div class="gate-icon">✒️</div>
+      <h3>تعلّم اللغة العربية</h3>
+      <p>مسار مستقل للتدرج في العربية.</p>
+    </div>
 
-<div class="options">
+    <div class="gate" onclick="openModal('العلم')">
+      <div class="gate-icon">📚</div>
+      <h3>العلم</h3>
+      <p>مساحة للتعلّم وبناء المعرفة.</p>
+    </div>
 
-<button class="option" onclick="answer(false)">
-Hello
-</button>
+    <div class="gate" onclick="openModal('رحلتي')">
+      <div class="gate-icon">🧭</div>
+      <h3>رحلتي</h3>
+      <p>تابع خطواتك وما أنجزته.</p>
+    </div>
 
-<button class="option" onclick="answer(true)">
-Thank you
-</button>
+  </div>
+</section>
 
-<button class="option" onclick="answer(false)">
-Good night
-</button>
+<section id="quran" class="quran-section">
+  <div class="section">
 
-</div>
+    <h2 class="section-title">القرآن الكريم</h2>
 
-<p id="result" class="result"></p>
+    <p class="section-intro">
+      القرآن وأوراده في مكان واحد.
+    </p>
 
-</div>
+    <div class="wards">
 
-<div class="box">
+      <div class="ward"
+           onclick="openModal('ورد القراءة بتدبر')">
+        <div class="ward-icon">📖</div>
+        <h3>قراءة بتدبر</h3>
+        <p>ورد القراءة والتدبر</p>
+      </div>
 
-<h2>🎯 تقدمك</h2>
+      <div class="ward"
+           onclick="openModal('ورد القيام')">
+        <div class="ward-icon">🌙</div>
+        <h3>ورد القيام</h3>
+        <p>ما أعددته لقيام الليل</p>
+      </div>
 
-<p>
-أكملت أول خطوة في مسار العربية.
-</p>
+      <div class="ward"
+           onclick="openModal('مراجعة القريب')">
+        <div class="ward-icon">🔄</div>
+        <h3>مراجعة القريب</h3>
+        <p>مراجعة المحفوظ القريب</p>
+      </div>
 
-<div class="progress">
-<div class="bar"></div>
-</div>
+      <div class="ward"
+           onclick="openModal('مراجعة البعيد')">
+        <div class="ward-icon">🌿</div>
+        <h3>مراجعة البعيد</h3>
+        <p>إحياء المحفوظ القديم</p>
+      </div>
 
-<button class="btn" onclick="finish()">
-إكمال الدرس الأول ✓
-</button>
+      <div class="ward"
+           onclick="openModal('حفظ الجديد')">
+        <div class="ward-icon">✨</div>
+        <h3>حفظ الجديد</h3>
+        <p>ورد الحفظ الجديد</p>
+      </div>
 
-<p id="finish" class="result"></p>
+      <div class="ward"
+           onclick="openModal('تحفيظ من أريد')">
+        <div class="ward-icon">👥</div>
+        <h3>تحفيظ من أريد</h3>
+        <p>ورد تحفيظ الآخرين</p>
+      </div>
 
-</div>
+      <div class="ward"
+           onclick="openModal('التشافِي والرقية الشرعية')">
+        <div class="ward-icon">🤲</div>
+        <h3>التشافِي والرقية</h3>
+        <p>ورد التشافي والرقية الشرعية</p>
+      </div>
+
+      <div class="ward"
+           onclick="openModal('الأذكار')">
+        <div class="ward-icon">🌅</div>
+        <h3>الأذكار</h3>
+        <p>الصباح والمساء والنوم</p>
+      </div>
+
+      <div class="ward"
+           onclick="openModal('خطى في القرآن')">
+        <div class="ward-icon">👣</div>
+        <h3>خطى في القرآن</h3>
+        <p>خطواتك مع كتاب الله</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="arabic" class="arabic">
+  <div class="section">
+
+    <h2 class="section-title">تعلّم اللغة العربية</h2>
+
+    <p class="section-intro">
+      مسار مستقل للتعلّم والتدرج في العربية.
+    </p>
+
+    <div class="arabic-card">
+      <div class="big">أ</div>
+
+      <h3>من الحرف إلى البيان</h3>
+
+      <p>
+        تعلّم العربية خطوة خطوة،
+        بفهمٍ وتطبيقٍ وممارسة.
+      </p>
+
+      <button class="btn btn-primary"
+              onclick="openModal('مسار تعلّم اللغة العربية')">
+        دخول المسار
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<section id="journey" class="section">
+
+  <h2 class="section-title">رحلتي في مُوَقَّت</h2>
+
+  <p class="section-intro">
+    اجعل ما تتعلمه وما تقرؤه خطواتٍ متتابعة.
+  </p>
+
+  <div class="gates">
+
+    <div class="gate" onclick="openModal('ورد اليوم')">
+      <div class="gate-icon">☀️</div>
+      <h3>ورد اليوم</h3>
+      <p>ما ستفعله اليوم.</p>
+    </div>
+
+    <div class="gate" onclick="openModal('إنجازاتي')">
+      <div class="gate-icon">🏆</div>
+      <h3>إنجازاتي</h3>
+      <p>ما أتممته في رحلتك.</p>
+    </div>
+
+    <div class="gate" onclick="openModal('خطة التعلم')">
+      <div class="gate-icon">🗺️</div>
+      <h3>خطة التعلم</h3>
+      <p>خطتك القادمة.</p>
+    </div>
+
+  </div>
+
+</section>
+
+</main>
 
 <footer>
-خطى في القرآن — القرآن وكل ما يتعلق به مجاني 🌿
+  <strong>مُوَقَّت</strong>
+  <br>
+  طريقك إلى العلم والعمل 🌿
 </footer>
 
+<!-- النافذة -->
+<div id="modal" class="modal" onclick="closeOutside(event)">
+  <div class="modal-box">
+
+    <button class="close" onclick="closeModal()">×</button>
+
+    <h2 id="modalTitle">مُوَقَّت</h2>
+
+    <p>
+      هذه المساحة جزء من رحلتك في مُوَقَّت.
+    </p>
+
+    <div class="check">
+      <input type="checkbox">
+      <label>أضف هذه الخطوة إلى وردي</label>
+    </div>
+
+    <div class="check">
+      <input type="checkbox">
+      <label>أتممتها اليوم</label>
+    </div>
+
+    <button class="btn btn-primary"
+            onclick="closeModal()">
+      حفظ
+    </button>
+
+  </div>
 </div>
 
 <script>
 
-function answer(correct){
-
-var r=document.getElementById("result");
-
-if(correct){
-
-r.textContent="أحسنت! ✅ شُكرًا = Thank you";
-r.style.color="#315c46";
-
-}else{
-
-r.textContent="ليست هذه الإجابة. حاول مرة أخرى 🌱";
-r.style.color="#8a4b35";
-
+function enterSite(){
+  document.getElementById("curtain").classList.add("hide");
 }
 
+function openModal(title){
+  document.getElementById("modalTitle").textContent = title;
+  document.getElementById("modal").classList.add("show");
 }
 
-function finish(){
-
-document.getElementById("finish").textContent=
-"ممتاز! 🎉 أنهيت الدرس التجريبي. الخطوة التالية ستكون درسًا جديدًا واختبارًا، ثم نضع الاشتراك المدفوع داخل مسار العربية فقط.";
-
+function closeModal(){
+  document.getElementById("modal").classList.remove("show");
 }
+
+function closeOutside(event){
+  if(event.target.id === "modal"){
+    closeModal();
+  }
+}
+
+document.addEventListener("keydown",function(event){
+  if(event.key === "Escape"){
+    closeModal();
+  }
+});
 
 </script>
 
