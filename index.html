@@ -39,21 +39,43 @@ button,input,textarea,select{font:inherit}button{cursor:pointer}
 footer{text-align:center;padding:30px 10px 18px;color:#89928c;font-size:12px;line-height:1.8}
 @media(max-width:750px){.cards{grid-template-columns:repeat(2,1fr)}.language-grid{grid-template-columns:repeat(2,1fr)}.contact-grid{grid-template-columns:1fr}.hero h1{font-size:26px}}
 @media(max-width:480px){.app{padding:10px}.topbar{top:5px}.brand span{display:none}.stats{gap:8px}.stat{padding:13px 6px}.stat strong{font-size:20px}.cards{grid-template-columns:repeat(2,1fr);gap:9px}.card{min-height:165px;padding:16px 8px}.icon{width:56px;height:56px;font-size:27px}.card h3{font-size:14px}.hero{padding:24px 18px}.content-box{padding:18px}}
+
+.ink-quote{margin-top:14px;color:#f4df9b;font-size:15px;font-weight:bold}
+.benefits-panel{margin-top:16px}
+.benefit-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}
+.benefit-grid>div{background:#f5f8f4;border-radius:17px;padding:15px}
+.benefit-grid strong{display:block;color:#315c46;margin-bottom:6px}
+.benefit-grid span{color:#718078;font-size:12px;line-height:1.7}
+.assess-option.selected{background:#e6f0e6;border-color:#47775c}
+@media(max-width:480px){.benefit-grid{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
 <div class="splash" id="splash">
   <div class="curtain left"></div><div class="curtain right"></div>
-  <div class="splash-inner"><div class="splash-logo">☘</div><h1>خطى في القرآن</h1><p>خطوة بعد خطوة... مع كتاب الله 🌿</p></div>
+  <div class="splash-inner"><div class="splash-logo">☘</div><h1>خطى في القرآن</h1><p>خطوة بعد خطوة... مع كتاب الله 🌿</p><div class="ink-quote">✒️ مع المحبرة إلى المقبرة</div></div>
 </div>
 <div class="app">
 <div class="topbar"><div class="brand"><div class="brand-icon">☘</div><span>خطى في القرآن</span></div><div class="top-actions"><button class="small-btn" onclick="openPage('contact')">💬 تواصل</button><button class="small-btn" onclick="openPage('progressPage')">📊 تقدمي</button></div></div>
 
 <section id="homePage" class="page active">
-<div class="hero"><div class="hero-content"><h1>بسم الله نبدأ 🌿</h1><p>مساحة تجمع رحلتك مع القرآن وتساعدك على بناء عادة يومية ثابتة، خطوة بعد خطوة.</p><div class="hero-buttons"><button class="primary-btn" onclick="openPage('daily')">ابدأ وردك اليوم</button><button class="secondary-btn" onclick="openPage('arabic')">🗣️ تعلّم العربية</button></div></div></div>
-<div class="stats"><div class="stat"><div class="stat-icon">🔥</div><strong id="streak">0</strong><span>أيام متتابعة</span></div><div class="stat"><div class="stat-icon">⭐</div><strong id="points">0</strong><span>نقاطك</span></div><div class="stat"><div class="stat-icon">✓</div><strong id="completed">0</strong><span>إنجازات</span></div></div>
+<div class="hero"><div class="hero-content"><h1>بسم الله نبدأ 🌿</h1><p>مساحة تجمع رحلتك مع القرآن وتساعدك على بناء عادة يومية ثابتة، خطوة بعد خطوة.</p><div class="hero-buttons"><button class="primary-btn" onclick="openPage('daily')">ابدأ وردك اليوم</button><button class="secondary-btn" onclick="openPage('assessment')">🧭 اختبار البداية</button>
+        <button class="secondary-btn" onclick="openPage('arabic')">تعلم العربية</button></div></div></div>
+<div class="stats"><div class="stat"><div class="stat-icon">📈</div><strong id="streak">0</strong><span>أيام متتابعة</span></div><div class="stat"><div class="stat-icon">⭐</div><strong id="points">0</strong><span>نقاطك</span></div><div class="stat"><div class="stat-icon">✓</div><strong id="completed">0</strong><span>إنجازات</span></div></div>
 <div class="daily"><div class="daily-head"><h2>🌱 رحلتك اليوم</h2><span id="dailyCount">0 / 3</span></div><div class="progress"><div class="progress-bar" id="homeProgress"></div></div><div class="progress-text">أكمل ثلاث خطوات صغيرة اليوم، وستُسجل في رحلتك.</div></div>
-<h2 class="section-title">📖 أورادك مع القرآن — مجانية بالكامل</h2>
+
+  <div class="daily benefits-panel">
+    <h2 style="color:#315c46">✨ ماذا تستفيد من مُوَقَّت؟</h2>
+    <div class="benefit-grid">
+      <div><strong>📖 القرآن</strong><span>قراءة، تدبر، حفظ، مراجعة وقيام — مجانًا.</span></div>
+      <div><strong>🧭 طريق شخصي</strong><span>اختبار بداية يحدد مستواك وهدفك ووقتك.</span></div>
+      <div><strong>📊 متابعة حقيقية</strong><span>تسجيل إنجازاتك اليومية وتقدمك واستمرارك.</span></div>
+      <div><strong>🎓 العربية</strong><span>دروس واختبارات ومسار متدرج لغير الناطقين بالعربية.</span></div>
+    </div>
+  </div>
+
+  <h2 class="section-title">📖 أورادك مع القرآن — مجانية بالكامل</h2>
 <div class="cards">
 <button class="card" onclick="openPage('reading')"><div class="icon">📖</div><h3>قراءة بتدبر</h3><p>ورد القراءة والتدبر في كتاب الله</p><span class="free">مجاني</span></button>
 <button class="card" onclick="openPage('qiyam')"><div class="icon">🌙</div><h3>ورد القيام</h3><p>ما تقرؤه في قيام الليل</p><span class="free">مجاني</span></button>
@@ -65,7 +87,7 @@ footer{text-align:center;padding:30px 10px 18px;color:#89928c;font-size:12px;lin
 <button class="card" onclick="openPage('adhkar')"><div class="icon">🌅</div><h3>الأذكار</h3><p>الصباح والمساء والنوم</p><span class="free">مجاني</span></button>
 <button class="card" onclick="openPage('journey')"><div class="icon">📍</div><h3>رحلتك في القرآن</h3><p>متابعة رحلتك وإنجازاتك</p><span class="free">مجاني</span></button>
 </div>
-<h2 class="section-title">🌍 تعلّم اللغة العربية</h2><div class="cards"><button class="card" onclick="openPage('arabic')"><div class="icon">🗣️</div><h3>تعلم العربية</h3><p>مسار خاص بغير الناطقين بالعربية</p><span class="paid">مسار مدفوع لاحقًا</span></button></div>
+<h2 class="section-title">🌍 تعلّم اللغة العربية</h2><div class="cards"><button class="card" onclick="openPage('arabic')"><div class="icon">أ</div><h3>تعلم العربية</h3><p>مسار خاص بغير الناطقين بالعربية</p><span class="paid">مسار مدفوع لاحقًا</span></button></div>
 </section>
 
 <section id="daily" class="page"><button class="back" onclick="goHome()">↩ العودة</button><div class="content-box"><h2>وردك اليوم</h2><p>اختر الخطوات التي تريد إنجازها اليوم. كل إنجاز يمنحك نقطة ويُسجل في رحلتك.</p>
@@ -81,7 +103,7 @@ footer{text-align:center;padding:30px 10px 18px;color:#89928c;font-size:12px;lin
 <section id="teaching" class="page"><button class="back" onclick="goHome()">↩ العودة</button><div class="content-box"><h2>🤲 تحفيظ من أريد</h2><p>مساحة لتنظيم متابعة من تساعده على حفظ القرآن.</p><div class="note">هذه الخدمة مجانية ضمن أقسام القرآن.</div><button class="action" onclick="completeTask('teachingTask')">✓ سجلت جلسة تحفيظ</button></div></section>
 <section id="ruqyah" class="page"><button class="back" onclick="goHome()">↩ العودة</button><div class="content-box"><h2>🌿 الرقية الشرعية</h2><p>قسم مخصص للقرآن والأذكار الواردة في الرقية الشرعية.</p><div class="note">هذا القسم مجاني بالكامل.</div><button class="action" onclick="completeTask('ruqyahTask')">✓ أكملت وردي</button></div></section>
 <section id="adhkar" class="page"><button class="back" onclick="goHome()">↩ العودة</button><div class="content-box"><h2>🌅 الأذكار</h2><p>أذكار الصباح والمساء والنوم.</p><div class="lesson-card"><h3>🌅 أذكار الصباح</h3><p>ابدأ يومك بذكر الله.</p><button class="action" onclick="completeTask('morningTask')">✓ تم</button></div><div class="lesson-card"><h3>🌇 أذكار المساء</h3><p>اختم يومك بذكر الله.</p><button class="action" onclick="completeTask('eveningTask')">✓ تم</button></div><div class="lesson-card"><h3>🌙 أذكار النوم</h3><p>اذكر الله قبل نومك.</p><button class="action" onclick="completeTask('sleepTask')">✓ تم</button></div></div></section>
-<section id="journey" class="page"><button class="back" onclick="goHome()">↩ العودة</button><div class="content-box"><h2>رحلتك في القرآن</h2><p>كل خطوة صغيرة تُضاف إلى رحلتك.</p><div class="stats"><div class="stat"><div class="stat-icon">⭐</div><strong id="journeyPoints">0</strong><span>نقاط</span></div><div class="stat"><div class="stat-icon">✓</div><strong id="journeyCompleted">0</strong><span>إنجازات</span></div><div class="stat"><div class="stat-icon">🔥</div><strong id="journeyStreak">0</strong><span>أيام</span></div></div><h3 style="color:#315c46;margin-top:20px">🏆 إنجازاتك</h3><div class="achievement"><div class="achievement-icon">🌱</div><div><strong>البداية</strong><p>أنجزت أول خطوة.</p></div></div><div class="achievement"><div class="achievement-icon">⭐</div><div><strong>خطوة بعد خطوة</strong><p>استمر في جمع النقاط والإنجازات.</p></div></div></div></section>
+<section id="journey" class="page"><button class="back" onclick="goHome()">↩ العودة</button><div class="content-box"><h2>رحلتك في القرآن</h2><p>كل خطوة صغيرة تُضاف إلى رحلتك.</p><div class="stats"><div class="stat"><div class="stat-icon">⭐</div><strong id="journeyPoints">0</strong><span>نقاط</span></div><div class="stat"><div class="stat-icon">✓</div><strong id="journeyCompleted">0</strong><span>إنجازات</span></div><div class="stat"><div class="stat-icon">📈</div><strong id="journeyStreak">0</strong><span>أيام</span></div></div><h3 style="color:#315c46;margin-top:20px">🏆 إنجازاتك</h3><div class="achievement"><div class="achievement-icon">🌱</div><div><strong>البداية</strong><p>أنجزت أول خطوة.</p></div></div><div class="achievement"><div class="achievement-icon">⭐</div><div><strong>خطوة بعد خطوة</strong><p>استمر في جمع النقاط والإنجازات.</p></div></div></div></section>
 
 <section id="arabic" class="page"><button class="back" onclick="goHome()">↩ العودة</button><div class="content-box"><h2>🗣️ تعلّم اللغة العربية</h2><p>مسار مخصص خصوصًا لغير الناطقين بالعربية، يبدأ من الأساس ويتدرج خطوة خطوة.</p><div class="note"><strong>📖 القرآن وكل ما يتعلق به مجاني بالكامل.</strong><br>أما مسار تعليم العربية فهو المسار الذي يمكن أن يكون مدفوعًا بعد التجربة المجانية.</div><h3 style="color:#315c46;margin-top:20px">🌍 اختر لغتك المساعدة</h3><div class="language-grid"><button class="choice" onclick="selectChoice(this)">🇬🇧 English</button><button class="choice" onclick="selectChoice(this)">🇫🇷 Français</button><button class="choice" onclick="selectChoice(this)">🇹🇷 Türkçe</button><button class="choice" onclick="selectChoice(this)">🌍 Other</button></div><h3 style="color:#315c46;margin-top:20px">🎯 اختر مستواك</h3><div class="language-grid"><button class="choice" onclick="selectChoice(this)">🌱 مبتدئ تمامًا</button><button class="choice" onclick="selectChoice(this)">📖 أعرف بعض الكلمات</button><button class="choice" onclick="selectChoice(this)">🗣️ أفهم العربية</button><button class="choice" onclick="selectChoice(this)">🏛️ أريد التعمق</button></div><button class="action" onclick="openPage('arabicLesson')">🆓 ابدأ الدرس التجريبي المجاني</button><button class="action" onclick="openPage('arabicSubscription')">💳 تعرف على مسار العربية</button></div></section>
 
@@ -89,7 +111,7 @@ footer{text-align:center;padding:30px 10px 18px;color:#89928c;font-size:12px;lin
 
 <section id="arabicSubscription" class="page"><button class="back" onclick="openPage('arabic')">↩ العودة للعربية</button><div class="content-box"><h2>💳 مسار تعلّم العربية</h2><div class="note"><strong>هذا هو المسار المدفوع فقط.</strong><br>القرآن وأوراده والأقسام المرتبطة به لا تدخل في الاشتراك.</div><div class="lesson-card"><h3>🎓 ماذا سيشمل المسار؟</h3><p>• دروس متدرجة<br>• اختبارات تفاعلية<br>• متابعة التقدم<br>• مستويات مختلفة<br>• تمارين استماع وقراءة<br>• تدريبات على الفصحى<br>• محتوى مناسب لغير الناطقين بالعربية</p></div><div class="lesson-card"><h3>🆓 التجربة المجانية</h3><p>ابدأ بالدرس التجريبي قبل اتخاذ قرار الاشتراك.</p><button class="action" onclick="openPage('arabicLesson')">ابدأ التجربة المجانية</button></div><div class="note">💡 الدفع الحقيقي سيُربط لاحقًا بخدمة دفع آمنة. هذه الصفحة الآن واجهة اختبار وليست عملية دفع حقيقية.</div></div></section>
 
-<section id="progressPage" class="page"><button class="back" onclick="goHome()">↩ العودة</button><div class="content-box"><h2>📊 تقدمك</h2><div class="stats"><div class="stat"><div class="stat-icon">⭐</div><strong id="progressPoints">0</strong><span>النقاط</span></div><div class="stat"><div class="stat-icon">✓</div><strong id="progressCompleted">0</strong><span>الإنجازات</span></div><div class="stat"><div class="stat-icon">🔥</div><strong id="progressStreak">0</strong><span>الاستمرار</span></div></div><div class="daily"><h3 style="color:#315c46">🌱 تقدم اليوم</h3><div class="progress"><div class="progress-bar" id="progressPageBar"></div></div><p id="progressPageText" class="progress-text"></p></div></div></section>
+<section id="progressPage" class="page"><button class="back" onclick="goHome()">↩ العودة</button><div class="content-box"><h2>📊 تقدمك</h2><div class="stats"><div class="stat"><div class="stat-icon">⭐</div><strong id="progressPoints">0</strong><span>النقاط</span></div><div class="stat"><div class="stat-icon">✓</div><strong id="progressCompleted">0</strong><span>الإنجازات</span></div><div class="stat"><div class="stat-icon">📈</div><strong id="progressStreak">0</strong><span>الاستمرار</span></div></div><div class="daily"><h3 style="color:#315c46">🌱 تقدم اليوم</h3><div class="progress"><div class="progress-bar" id="progressPageBar"></div></div><p id="progressPageText" class="progress-text"></p></div></div></section>
 
 <section id="contact" class="page"><button class="back" onclick="goHome()">↩ العودة</button><div class="content-box"><h2>💬 تواصل معنا</h2><p>لديك سؤال أو اقتراح أو تحتاج إلى مساعدة؟ نحن نريد أن نسمع منك.</p><div class="contact-grid"><div class="contact-card"><div class="big">📱</div><h3>تيليجرام</h3><p>للتواصل المباشر مع معلّم العربية.</p><a class="telegram" href="https://t.me/MyTeacherArabic" target="_blank" rel="noopener">💬 ابدأ المحادثة</a><p style="margin-top:10px">@MyTeacherArabic</p></div><div class="contact-card"><div class="big">🌿</div><h3>دعم المنصة</h3><p>يمكنك إرسال اقتراح أو ملاحظة حول تجربة الموقع.</p><button class="action" onclick="showToast('شكرًا لك 🌿 سنجعل المنصة أفضل خطوة بعد خطوة.')">أرسل اقتراحًا</button></div></div><div class="form"><h3 style="color:#315c46">📝 رسالة أو اقتراح</h3><input id="contactName" class="input" placeholder="اسمك"><select id="contactType" class="select"><option value="">نوع الرسالة</option><option>سؤال</option><option>مشكلة</option><option>اقتراح</option><option>استفسار عن العربية</option><option>أخرى</option></select><textarea id="contactMessage" class="textarea" placeholder="اكتب رسالتك هنا..."></textarea><button class="action" onclick="prepareTelegramMessage()">💬 إرسال عبر تيليجرام</button><p id="contactResult" class="result"></p></div></div></section>
 <footer>مُوَقَّت | خطى في القرآن 🌿<br>القرآن وكل ما يتعلق به مجاني بالكامل • تعلّم العربية هو المسار المدفوع</footer>
@@ -112,6 +134,48 @@ function arabicAnswer(correct){var r=document.getElementById("arabicResult");if(
 function finishArabicLesson(){var f=document.getElementById("arabicFinish");f.textContent="ممتاز! 🎉 أنهيت الدرس التجريبي المجاني.";f.style.color="#315c46";state.points+=15;state.completed+=1;saveState();updateUI();showToast("أكملت درس العربية +15 نقطة 🎓")}
 function prepareTelegramMessage(){var n=document.getElementById("contactName").value.trim(),t=document.getElementById("contactType").value,m=document.getElementById("contactMessage").value.trim();if(!m){document.getElementById("contactResult").textContent="اكتب رسالتك أولًا من فضلك 🌿";return}var text="السلام عليكم،%0A%0Aالاسم: "+encodeURIComponent(n||"غير مذكور")+"%0Aنوع الرسالة: "+encodeURIComponent(t||"غير محدد")+"%0A%0A"+encodeURIComponent(m);window.open("https://t.me/MyTeacherArabic?text="+text,"_blank","noopener");document.getElementById("contactResult").textContent="سيتم فتح تيليجرام لإرسال رسالتك إلى @MyTeacherArabic 💬"}
 var toastTimer;function showToast(m){var t=document.getElementById("toast");t.textContent=m;t.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(function(){t.classList.remove("show")},2800)}
+
+var assessment = JSON.parse(localStorage.getItem("khutaAssessment") || "{}");
+
+function chooseAssessment(button,key,value){
+  button.parentElement.querySelectorAll(".assess-option").forEach(function(item){
+    item.classList.remove("selected");
+  });
+  button.classList.add("selected");
+  assessment[key]=value;
+  localStorage.setItem("khutaAssessment",JSON.stringify(assessment));
+}
+
+function showMyPath(){
+  var result=document.getElementById("assessmentResult");
+  if(!result)return;
+  var missing=[];
+  ["level","field","time","goal"].forEach(function(k){
+    if(!assessment[k])missing.push(k);
+  });
+  if(missing.length){
+    result.style.display="block";
+    result.textContent="أكمل الاختيارات الأربعة أولًا، ثم سنبني لك طريقك 🌱";
+    return;
+  }
+  var path;
+  if(assessment.field==="اللغة العربية"){
+    path="ابدأ بالدرس التجريبي في العربية، ثم تابع المستوى المناسب لك.";
+  }else if(assessment.field==="القرآن الكريم"){
+    path="ابدأ بورد القراءة والتدبر، ثم أضف الحفظ أو المراجعة حسب هدفك.";
+  }else if(assessment.field==="العلوم الشرعية"){
+    path="ابدأ من الأساس، واجعل لك وردًا ثابتًا يناسب وقتك.";
+  }else{
+    path="ابدأ بالأساسيات، ثم انتقل تدريجيًا إلى المجال الذي تختاره.";
+  }
+  result.style.display="block";
+  result.innerHTML="<strong>🌿 أحسنت.</strong><br>"+path+
+    "<br><br><strong>المستوى:</strong> "+assessment.level+
+    "<br><strong>الوقت:</strong> "+assessment.time+
+    "<br><strong>الهدف:</strong> "+assessment.goal;
+  showToast("تم بناء طريقك المبدئي 🌿");
+}
+
 </script>
 </body>
 </html>
