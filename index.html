@@ -1,63 +1,1162 @@
-<!doctype html><html lang="ar" dir="rtl"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#315c46">
 <title>خطى في القرآن</title>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Tahoma,Arial;background:#f6f3ea;color:#24352b}.wrap{max-width:1050px;margin:auto;padding:14px}.top,.box,.card{background:#fff;border-radius:22px;box-shadow:0 8px 25px #24493018}.top{position:sticky;top:8px;z-index:5;padding:10px 14px;display:flex;justify-content:space-between;gap:8px}.brand{color:#315c46;font-weight:bold}.btn{border:0;border-radius:13px;padding:10px 14px;background:#edf3ed;color:#315c46;cursor:pointer}.primary{background:#315c46;color:white}.hero{background:linear-gradient(135deg,#315c46,#47775c);color:white;border-radius:30px;padding:30px 22px}.hero h1{color:white}.page{display:none}.page.on{display:block}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.card{border:0;padding:18px;text-align:center;min-height:130px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:15px 0}.stat{text-align:center;padding:14px;background:#fff;border-radius:18px}.stat b{display:block;font-size:22px;color:#315c46}.box{padding:20px;margin:15px 0}.bar{height:11px;background:#e8e5db;border-radius:20px;overflow:hidden}.fill{height:100%;width:0;background:#315c46}.lesson{background:#f1f7f1;padding:15px;border-radius:17px;margin:10px 0}.input{width:100%;padding:12px;margin:6px 0;border:1px solid #ddd;border-radius:12px}.muted{color:#718078;line-height:1.8}@media(max-width:700px){.grid{grid-template-columns:repeat(2,1fr)}.top{flex-wrap:wrap}}
-</style></head><body><div class="wrap">
-<header class="top"><div class="brand">☘ خطى في القرآن</div><div>
+*{box-sizing:border-box}
+body{margin:0;font-family:Tahoma,Arial;background:#f6f3ea;color:#24352b}
+.wrap{max-width:1050px;margin:auto;padding:14px}
+
+.top,.box,.card{
+background:#fff;
+border-radius:22px;
+box-shadow:0 8px 25px #24493018
+}
+
+.top{
+position:sticky;
+top:8px;
+z-index:5;
+padding:10px 14px;
+display:flex;
+justify-content:space-between;
+gap:8px
+}
+
+.brand{color:#315c46;font-weight:bold}
+
+.btn{
+border:0;
+border-radius:13px;
+padding:10px 14px;
+background:#edf3ed;
+color:#315c46;
+cursor:pointer
+}
+
+.primary{background:#315c46;color:white}
+
+.hero{
+background:linear-gradient(135deg,#315c46,#47775c);
+color:white;
+border-radius:30px;
+padding:30px 22px
+}
+
+.hero h1{color:white}
+
+.page{display:none}
+.page.on{display:block}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:12px
+}
+
+.card{
+border:0;
+padding:18px;
+text-align:center;
+min-height:130px
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px;
+margin:15px 0
+}
+
+.stat{
+text-align:center;
+padding:14px;
+background:#fff;
+border-radius:18px
+}
+
+.stat b{
+display:block;
+font-size:22px;
+color:#315c46
+}
+
+.box{
+padding:20px;
+margin:15px 0
+}
+
+.bar{
+height:11px;
+background:#e8e5db;
+border-radius:20px;
+overflow:hidden
+}
+
+.fill{
+height:100%;
+width:0;
+background:#315c46;
+transition:.3s
+}
+
+.lesson{
+background:#f1f7f1;
+padding:15px;
+border-radius:17px;
+margin:10px 0
+}
+
+.input{
+width:100%;
+padding:12px;
+margin:6px 0;
+border:1px solid #ddd;
+border-radius:12px
+}
+
+.muted{
+color:#718078;
+line-height:1.8
+}
+
+.ai-box{
+background:#f8faf7;
+border:1px solid #dce7dd;
+border-radius:18px;
+padding:15px
+}
+
+.ai-answer{
+min-height:50px;
+margin-top:10px;
+line-height:1.9
+}
+
+.status{
+margin-top:10px;
+padding:10px;
+border-radius:12px;
+background:#f5f5f5
+}
+
+@media(max-width:700px){
+.grid{grid-template-columns:repeat(2,1fr)}
+.top{flex-wrap:wrap}
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+<header class="top">
+
+<div class="brand">☘ خطى في القرآن</div>
+
+<div>
 <button class="btn" onclick="show('home')">الرئيسية</button>
 <button class="btn" onclick="show('progress')">تقدمي</button>
-<button class="btn" onclick="show('account')">الحساب</button></div></header>
+<button class="btn" onclick="show('account')">الحساب</button>
+</div>
 
-<section id="home" class="page on"><div class="hero"><h1>بسم الله نبدأ 🌿</h1>
-<p>خطوة بعد خطوة مع كتاب الله. القرآن وأوراده مجانية بالكامل، وتعليم العربية هو المسار المدفوع.</p>
-<button class="btn primary" onclick="show('daily')">👣 ابدأ وردك اليوم</button>
-<button class="btn" onclick="show('arabic')">🗣️ العربية</button></div>
-<div class="stats"><div class="stat">🔥<b id="streak">0</b>أيام</div><div class="stat">⭐<b id="points">0</b>نقاط</div><div class="stat">✓<b id="completed">0</b>إنجازات</div></div>
-<div class="box"><h2>🌱 رحلتك اليوم</h2><div class="bar"><div id="bar" class="fill"></div></div><p id="today" class="muted">0 / 3</p></div>
-<h2>📖 أوراد القرآن — مجانية</h2><div class="grid">
-<button class="card" onclick="task('قراءة')">📖<h3>قراءة بتدبر</h3></button>
-<button class="card" onclick="task('قيام')">🌙<h3>ورد القيام</h3></button>
-<button class="card" onclick="task('مراجعة')">🔄<h3>مراجعة المحفوظ</h3></button>
-<button class="card" onclick="task('حفظ')">✨<h3>حفظ الجديد</h3></button>
-<button class="card" onclick="task('تحفيظ')">🤲<h3>تحفيظ من أريد</h3></button>
-<button class="card" onclick="task('أذكار')">🌅<h3>الأذكار</h3></button></div></section>
+</header>
 
-<section id="daily" class="page"><div class="box"><button class="btn" onclick="show('home')">↩ العودة</button><h2>👣 وردك اليوم</h2>
-<div class="lesson">📖 القراءة <button class="btn primary" onclick="task('قراءة')">✓ تم</button></div>
-<div class="lesson">🌅 الأذكار <button class="btn primary" onclick="task('أذكار')">✓ تم</button></div>
-<div class="lesson">✨ الحفظ/المراجعة <button class="btn primary" onclick="task('حفظ/مراجعة')">✓ تم</button></div></div></section>
 
-<section id="arabic" class="page"><div class="box"><button class="btn" onclick="show('home')">↩ العودة</button><h2>🗣️ تعلّم العربية</h2>
-<p class="muted">مسار لغير الناطقين بالعربية، يبدأ بتجربة مجانية ثم يمكن الاشتراك في المسار المدفوع.</p>
-<div class="lesson"><b>مَرْحَبًا</b> — Hello<br><b>شُكْرًا</b> — Thank you<br><br>
-ما معنى «شُكْرًا»؟<br><button class="btn" onclick="answer(true)">Thank you</button>
-<button class="btn" onclick="answer(false)">Good night</button><p id="answer"></p></div>
-<div class="lesson"><h3>💳 الاشتراك</h3><p class="muted">الدفع الحقيقي لن يتم من داخل HTML ولن تُحفظ بيانات البطاقات. عند التفعيل سيُستخدم مزود دفع مرخّص/متاح قانونيًا مع Checkout مستضاف وحالة اشتراك موثقة في الخادم.</p>
-<button class="btn primary" onclick="alert('واجهة الدفع جاهزة معماريًا، وتحتاج بيانات مزود الدفع القانوني قبل تفعيل التحصيل.')">عرض الدفع الآمن</button></div></div></section>
+<section id="home" class="page on">
 
-<section id="progress" class="page"><div class="box"><button class="btn" onclick="show('home')">↩ العودة</button><h2>📊 تقدمي</h2><div class="stats"><div class="stat">⭐<b id="pp">0</b>نقاط</div><div class="stat">✓<b id="pc">0</b>إنجازات</div><div class="stat">🔥<b id="ps">0</b>أيام</div></div></div></section>
+<div class="hero">
 
-<section id="account" class="page"><div class="box"><button class="btn" onclick="show('home')">↩ العودة</button><h2>👤 الحساب</h2>
-<p class="muted">الحساب يحفظ التقدم في قاعدة Supabase الحقيقية.</p>
-<input id="email" class="input" placeholder="البريد الإلكتروني"><input id="password" type="password" class="input" placeholder="كلمة المرور">
-<button class="btn primary" onclick="signup()">إنشاء حساب</button><button class="btn" onclick="login()">دخول</button><p id="auth"></p></div></section>
+<h1>بسم الله نبدأ 🌿</h1>
 
-<footer class="muted" style="text-align:center;padding:25px">خطى في القرآن 🌿</footer></div>
+<p>
+خطوة بعد خطوة مع كتاب الله.
+القرآن وأوراده مجانية بالكامل،
+وتعليم العربية هو المسار المدفوع.
+</p>
+
+<button class="btn primary" onclick="show('daily')">
+ابدأ وردك اليوم
+</button>
+
+<button class="btn" onclick="show('arabic')">
+🗣️ العربية
+</button>
+
+</div>
+
+
+<div class="stats">
+
+<div class="stat">
+🔥
+<b id="streak">0</b>
+أيام
+</div>
+
+<div class="stat">
+⭐
+<b id="points">0</b>
+نقاط
+</div>
+
+<div class="stat">
+✓
+<b id="completed">0</b>
+إنجازات
+</div>
+
+</div>
+
+
+<div class="box">
+
+<h2>🌱 رحلتك اليوم</h2>
+
+<div class="bar">
+<div id="bar" class="fill"></div>
+</div>
+
+<p id="today" class="muted">
+0 / 3 خطوات اليوم
+</p>
+
+</div>
+
+
+<h2>📖 أوراد القرآن — مجانية</h2>
+
+<div class="grid">
+
+<button class="card" onclick="task('قراءة')">
+📖
+<h3>قراءة بتدبر</h3>
+</button>
+
+<button class="card" onclick="task('قيام')">
+🌙
+<h3>ورد القيام</h3>
+</button>
+
+<button class="card" onclick="task('مراجعة')">
+🔄
+<h3>مراجعة المحفوظ</h3>
+</button>
+
+<button class="card" onclick="task('حفظ')">
+✨
+<h3>حفظ الجديد</h3>
+</button>
+
+<button class="card" onclick="task('تحفيظ')">
+🤲
+<h3>تحفيظ من أريد</h3>
+</button>
+
+<button class="card" onclick="task('أذكار')">
+🌅
+<h3>الأذكار</h3>
+</button>
+
+</div>
+
+</section>
+
+
+<section id="daily" class="page">
+
+<div class="box">
+
+<button class="btn" onclick="show('home')">
+↩ العودة
+</button>
+
+<h2>وردك اليوم</h2>
+
+<div class="lesson">
+📖 القراءة
+<button class="btn primary" onclick="task('قراءة')">✓ تم</button>
+</div>
+
+<div class="lesson">
+🌅 الأذكار
+<button class="btn primary" onclick="task('أذكار')">✓ تم</button>
+</div>
+
+<div class="lesson">
+✨ الحفظ/المراجعة
+<button class="btn primary" onclick="task('حفظ/مراجعة')">✓ تم</button>
+</div>
+
+</div>
+
+</section>
+
+
+<section id="arabic" class="page">
+
+<div class="box">
+
+<button class="btn" onclick="show('home')">
+↩ العودة
+</button>
+
+<h2>🗣️ تعلّم العربية</h2>
+
+<p class="muted">
+مسار لغير الناطقين بالعربية،
+يبدأ بتجربة مجانية ثم يمكن الاشتراك
+في المسار المدفوع.
+</p>
+
+
+<div class="lesson">
+
+<b>مَرْحَبًا</b> — Hello
+<br>
+
+<b>شُكْرًا</b> — Thank you
+
+<br><br>
+
+ما معنى «شُكْرًا»؟
+
+<br>
+
+<button class="btn" onclick="answer(true)">
+Thank you
+</button>
+
+<button class="btn" onclick="answer(false)">
+Good night
+</button>
+
+<p id="answer"></p>
+
+</div>
+
+
+<div class="lesson">
+
+<h3>💳 الاشتراك</h3>
+
+<p class="muted">
+الدفع يتم من خلال صفحة دفع آمنة.
+لا يتم حفظ بيانات البطاقات داخل الموقع.
+</p>
+
+<button class="btn primary" onclick="startPayment()">
+الاشتراك الآن
+</button>
+
+<p id="paymentStatus" class="status"></p>
+
+</div>
+
+
+<div class="lesson ai-box">
+
+<h3>🤖 مساعد العربية</h3>
+
+<p class="muted">
+اسأل عن معنى كلمة أو قاعدة أو اطلب شرحًا مبسطًا.
+</p>
+
+<input
+id="aiQuestion"
+class="input"
+placeholder="اكتب سؤالك هنا">
+
+<button class="btn primary" onclick="askAI()">
+اسأل المساعد
+</button>
+
+<button class="btn" onclick="speakAI()">
+🔊 استمع
+</button>
+
+<div id="aiAnswer" class="ai-answer"></div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section id="progress" class="page">
+
+<div class="box">
+
+<button class="btn" onclick="show('home')">
+↩ العودة
+</button>
+
+<h2>📊 تقدمي</h2>
+
+<div class="stats">
+
+<div class="stat">
+⭐
+<b id="pp">0</b>
+نقاط
+</div>
+
+<div class="stat">
+✓
+<b id="pc">0</b>
+إنجازات
+</div>
+
+<div class="stat">
+🔥
+<b id="ps">0</b>
+أيام
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section id="account" class="page">
+
+<div class="box">
+
+<button class="btn" onclick="show('home')">
+↩ العودة
+</button>
+
+<h2>👤 الحساب</h2>
+
+<p class="muted">
+الحساب متصل بقاعدة Supabase الحقيقية.
+</p>
+
+<input
+id="email"
+class="input"
+type="email"
+placeholder="البريد الإلكتروني">
+
+<input
+id="password"
+class="input"
+type="password"
+placeholder="كلمة المرور">
+
+<button class="btn primary" onclick="signup()">
+إنشاء حساب
+</button>
+
+<button class="btn" onclick="login()">
+دخول
+</button>
+
+<button class="btn" onclick="logout()">
+تسجيل الخروج
+</button>
+
+<p id="auth" class="status"></p>
+
+</div>
+
+</section>
+
+
+<footer
+class="muted"
+style="text-align:center;padding:25px">
+
+خطى في القرآن 🌿
+
+</footer>
+
+</div>
+
+
 <script>
-const URL="https://cxyjplmwtqgfufgzsvpo.supabase.co";
-const KEY="sb_publishable_8jNYDJ0Oux4JNxFE4s5WRQ_-YjJcLHx";
-const db=supabase.createClient(URL,KEY);
-let s=JSON.parse(localStorage.getItem("khutaState")||'{"points":0,"completed":0,"streak":0,"today":"","tasks":[]}');
-let d=new Date().toISOString().slice(0,10);if(s.today!==d){s.today=d;s.tasks=[];save()}
-function save(){localStorage.setItem("khutaState",JSON.stringify(s));update()}
-function show(id){document.querySelectorAll(".page").forEach(x=>x.classList.remove("on"));document.getElementById(id).classList.add("on");update();scrollTo(0,0)}
-function update(){let n=s.tasks.length,p=Math.min(100,Math.round(n/3*100));bar.style.width=p+"%";today.textContent=n+" / 3 خطوات اليوم";points.textContent=s.points;completed.textContent=s.completed;streak.textContent=s.streak;pp.textContent=s.points;pc.textContent=s.completed;ps.textContent=s.streak}
-async function task(x){if(s.tasks.includes(x)){alert("هذه الخطوة مسجلة بالفعل اليوم.");return}if(s.tasks.length>=3){alert("أكملت خطوات اليوم الثلاث.");return}s.tasks.push(x);s.points+=10;s.completed++;let last=localStorage.getItem("khutaLastDay");if(last!==d){let q=new Date();q.setDate(q.getDate()-1);s.streak=last===q.toISOString().slice(0,10)?s.streak+1:1;localStorage.setItem("khutaLastDay",d)}save();await sync()}
-async function sync(){let {data:{user}}=await db.auth.getUser();if(user)await db.from("lesson_progress").upsert({user_id:user.id,points:s.points,completed:s.completed,streak:s.streak,today:s.today,today_tasks:s.tasks},{onConflict:"user_id"})}
-function answer(ok){document.getElementById("answer").textContent=ok?"أحسنت! +5 نقاط ⭐":"حاول مرة أخرى 🌱";if(ok){s.points+=5;save()}}
-async function signup(){let r=await db.auth.signUp({email:email.value,password:password.value});auth.textContent=r.error?r.error.message:"تم إنشاء الحساب. افحص البريد إذا طُلب التأكيد."}
-async function login(){let r=await db.auth.signInWithPassword({email:email.value,password:password.value});auth.textContent=r.error?r.error.message:"تم الدخول وحفظ تقدمك في القاعدة.";if(!r.error)sync()}
+
+/* =========================
+   SUPABASE
+========================= */
+
+const SUPABASE_URL =
+"https://cxyjplmwtqgfufgzsvpo.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_8jNYDJ0Oux4JNxFE4s5WRQ_-YjJcLHx";
+
+const db =
+supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+
+/* =========================
+   LOCAL STATE
+========================= */
+
+let s = JSON.parse(
+localStorage.getItem("khutaState") ||
+'{"points":0,"completed":0,"streak":0,"today":"","tasks":[]}'
+);
+
+let d =
+new Date().toISOString().slice(0,10);
+
+if(s.today !== d){
+
+s.today=d;
+s.tasks=[];
+
+save();
+
+}
+
+
+function save(){
+
+localStorage.setItem(
+"khutaState",
+JSON.stringify(s)
+);
+
 update();
-</script></body></html>
+
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+function show(id){
+
+document
+.querySelectorAll(".page")
+.forEach(x =>
+x.classList.remove("on")
+);
+
+document
+.getElementById(id)
+.classList.add("on");
+
+update();
+
+window.scrollTo(0,0);
+
+}
+
+
+/* =========================
+   UI
+========================= */
+
+function update(){
+
+const n=s.tasks.length;
+
+const p=Math.min(
+100,
+Math.round(n/3*100)
+);
+
+document.getElementById("bar").style.width =
+p+"%";
+
+document.getElementById("today").textContent =
+n+" / 3 خطوات اليوم";
+
+document.getElementById("points").textContent =
+s.points;
+
+document.getElementById("completed").textContent =
+s.completed;
+
+document.getElementById("streak").textContent =
+s.streak;
+
+document.getElementById("pp").textContent =
+s.points;
+
+document.getElementById("pc").textContent =
+s.completed;
+
+document.getElementById("ps").textContent =
+s.streak;
+
+}
+
+
+/* =========================
+   DAILY TASK
+========================= */
+
+async function task(x){
+
+if(s.tasks.includes(x)){
+
+alert("هذه الخطوة مسجلة بالفعل اليوم.");
+
+return;
+
+}
+
+if(s.tasks.length>=3){
+
+alert("أكملت خطوات اليوم الثلاث.");
+
+return;
+
+}
+
+s.tasks.push(x);
+
+s.points+=10;
+
+s.completed++;
+
+let last =
+localStorage.getItem("khutaLastDay");
+
+if(last!==d){
+
+let q=new Date();
+
+q.setDate(q.getDate()-1);
+
+s.streak =
+last===q.toISOString().slice(0,10)
+?s.streak+1
+:1;
+
+localStorage.setItem(
+"khutaLastDay",
+d
+);
+
+}
+
+save();
+
+await syncProgress();
+
+}
+
+
+/* =========================
+   REAL SUPABASE PROGRESS
+========================= */
+
+async function syncProgress(){
+
+const {
+data:{user}
+}=await db.auth.getUser();
+
+if(!user)return;
+
+const {error}=await db
+.from("khuta_progress")
+.upsert({
+
+user_id:user.id,
+points:s.points,
+completed:s.completed,
+streak:s.streak,
+today:s.today,
+today_tasks:s.tasks
+
+},{
+onConflict:"user_id"
+});
+
+if(error){
+
+console.error(
+"Supabase progress error:",
+error
+);
+
+}
+
+}
+
+
+/* =========================
+   LOAD PROGRESS
+========================= */
+
+async function loadProgress(){
+
+const {
+data:{user}
+}=await db.auth.getUser();
+
+if(!user)return;
+
+const {
+data,
+error
+}=await db
+.from("khuta_progress")
+.select("*")
+.eq("user_id",user.id)
+.maybeSingle();
+
+if(error){
+
+console.error(
+"Load progress error:",
+error
+);
+
+return;
+
+}
+
+if(!data)return;
+
+s.points=
+Number(data.points||0);
+
+s.completed=
+Number(data.completed||0);
+
+s.streak=
+Number(data.streak||0);
+
+s.today=
+data.today||d;
+
+s.tasks=
+Array.isArray(data.today_tasks)
+?data.today_tasks
+:[];
+
+if(s.today!==d){
+
+s.today=d;
+s.tasks=[];
+
+await syncProgress();
+
+}
+
+save();
+
+}
+
+
+/* =========================
+   ARABIC LESSON
+========================= */
+
+function answer(ok){
+
+const el=
+document.getElementById("answer");
+
+if(ok){
+
+el.textContent=
+"أحسنت! +5 نقاط ⭐";
+
+s.points+=5;
+
+save();
+
+}else{
+
+el.textContent=
+"حاول مرة أخرى 🌱";
+
+}
+
+}
+
+
+/* =========================
+   SIGN UP
+========================= */
+
+async function signup(){
+
+const email=
+document.getElementById("email")
+.value.trim();
+
+const password=
+document.getElementById("password")
+.value;
+
+if(!email||!password){
+
+document.getElementById("auth")
+.textContent=
+"أدخل البريد الإلكتروني وكلمة المرور.";
+
+return;
+
+}
+
+const {error}=
+await db.auth.signUp({
+email,
+password
+});
+
+document.getElementById("auth")
+.textContent=
+error
+?error.message
+:"تم إنشاء الحساب. افحص بريدك إذا طُلب تأكيده.";
+
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+async function login(){
+
+const email=
+document.getElementById("email")
+.value.trim();
+
+const password=
+document.getElementById("password")
+.value;
+
+const {
+data,
+error
+}=
+await db.auth.signInWithPassword({
+email,
+password
+});
+
+document.getElementById("auth")
+.textContent=
+error
+?error.message
+:"تم الدخول بنجاح.";
+
+if(!error){
+
+await loadProgress();
+
+}
+
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+async function logout(){
+
+await db.auth.signOut();
+
+document.getElementById("auth")
+.textContent=
+"تم تسجيل الخروج.";
+
+}
+
+
+/* =========================
+   PAYMENT
+========================= */
+
+async function startPayment(){
+
+const status=
+document.getElementById(
+"paymentStatus"
+);
+
+status.textContent=
+"جارٍ تجهيز الدفع الآمن...";
+
+
+const {
+data:{session}
+}=
+await db.auth.getSession();
+
+
+if(!session){
+
+status.textContent=
+"يجب تسجيل الدخول أولًا لإتمام الاشتراك.";
+
+show("account");
+
+return;
+
+}
+
+
+try{
+
+const response=
+await fetch(
+
+SUPABASE_URL+
+"/functions/v1/create-checkout",
+
+{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":
+"application/json",
+
+"Authorization":
+"Bearer "+
+session.access_token
+
+},
+
+body:JSON.stringify({
+
+plan:"arabic_monthly"
+
+})
+
+}
+
+);
+
+
+const result=
+await response.json();
+
+
+if(result.url){
+
+window.location.href=
+result.url;
+
+return;
+
+}
+
+
+status.textContent=
+result.error||
+"تعذر إنشاء عملية الدفع.";
+
+}catch(error){
+
+console.error(error);
+
+status.textContent=
+"بوابة الدفع غير مفعلة على الخادم حاليًا.";
+
+}
+
+}
+
+
+/* =========================
+   AI
+========================= */
+
+let lastAIAnswer="";
+
+
+async function askAI(){
+
+const question=
+document
+.getElementById("aiQuestion")
+.value.trim();
+
+const output=
+document.getElementById("aiAnswer");
+
+
+if(!question){
+
+output.textContent=
+"اكتب سؤالك أولًا.";
+
+return;
+
+}
+
+output.textContent=
+"جارٍ التفكير...";
+
+
+const {
+data:{session}
+}=
+await db.auth.getSession();
+
+
+if(!session){
+
+output.textContent=
+"سجّل الدخول لاستخدام المساعد.";
+
+return;
+
+}
+
+
+try{
+
+const response=
+await fetch(
+
+SUPABASE_URL+
+"/functions/v1/arabic-ai",
+
+{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":
+"application/json",
+
+"Authorization":
+"Bearer "+
+session.access_token
+
+},
+
+body:JSON.stringify({
+
+question
+
+})
+
+}
+
+);
+
+
+const result=
+await response.json();
+
+
+if(result.answer){
+
+lastAIAnswer=
+result.answer;
+
+output.textContent=
+result.answer;
+
+}else{
+
+output.textContent=
+result.error||
+"تعذر الحصول على الإجابة.";
+
+}
+
+}catch(error){
+
+console.error(error);
+
+output.textContent=
+"المساعد الذكي غير مفعّل على الخادم حاليًا.";
+
+}
+
+}
+
+
+/* =========================
+   ARABIC VOICE
+========================= */
+
+function speakAI(){
+
+if(!lastAIAnswer){
+
+alert(
+"اطلب إجابة من المساعد أولًا."
+);
+
+return;
+
+}
+
+if(!("speechSynthesis" in window)){
+
+alert(
+"المتصفح لا يدعم تشغيل الصوت."
+);
+
+return;
+
+}
+
+window.speechSynthesis.cancel();
+
+const utterance=
+new SpeechSynthesisUtterance(
+lastAIAnswer
+);
+
+utterance.lang="ar-SA";
+utterance.rate=0.88;
+utterance.pitch=0.9;
+utterance.volume=1;
+
+window.speechSynthesis.speak(
+utterance
+);
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+(async function(){
+
+update();
+
+const {
+data:{session}
+}=
+await db.auth.getSession();
+
+if(session){
+
+await loadProgress();
+
+}
+
+})();
+
+</script>
+
+</body>
+</html>
